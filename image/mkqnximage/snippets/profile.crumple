@@ -1,0 +1,3 @@
+# Crumple Zone shell conveniences
+export PS1='crumple# '
+alias cz=czctl

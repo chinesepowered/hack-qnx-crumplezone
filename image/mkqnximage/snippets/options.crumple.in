@@ -1,0 +1,7 @@
+# Crumple Zone: extra procnto options (sourced by mkqnximage as bash).
+# @CZ_PROC_OPTIONS@ is filled in by image/build-image.sh. Under QEMU TCG we pass
+# -h (no CPU halt in the idle thread): a halted emulated CPU has to be woken by
+# a host thread signal before it notices an interrupt, which adds 100 us or more
+# of emulator latency to every timer wake-up. A spinning idle thread sees it at
+# once. On real hardware or KVM leave it empty.
+PROC_OPTIONS="@CZ_PROC_OPTIONS@"

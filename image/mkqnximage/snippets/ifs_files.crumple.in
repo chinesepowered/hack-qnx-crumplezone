@@ -1,0 +1,12 @@
+# Crumple Zone binaries, added to the IFS (/proc/boot) by mkqnximage.
+# Generated into build/mkqnximage-extra by image/build-image.sh, which replaces
+# @CZ_BIN@ with the absolute path of build/x86_64.
+[uid=0 gid=0 perms=0755] guardian=@CZ_BIN@/guardian
+[uid=0 gid=0 perms=0755] vehicle_sim=@CZ_BIN@/vehicle_sim
+[uid=0 gid=0 perms=0755] wheel_sensors=@CZ_BIN@/wheel_sensors
+[uid=0 gid=0 perms=0755] brake_ctl=@CZ_BIN@/brake_ctl
+[uid=0 gid=0 perms=0755] steer_ctl=@CZ_BIN@/steer_ctl
+[uid=0 gid=0 perms=0755] cluster=@CZ_BIN@/cluster
+[uid=0 gid=0 perms=0755] telemetry=@CZ_BIN@/telemetry
+[uid=0 gid=0 perms=0755] infotainment=@CZ_BIN@/infotainment
+[uid=0 gid=0 perms=0755] czctl=@CZ_BIN@/czctl

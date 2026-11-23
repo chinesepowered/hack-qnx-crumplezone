@@ -1,0 +1,4 @@
+# Crumple Zone: boot straight into the demo. The guardian creates the bus and
+# spawns every other process with its priority, CPU, credentials and limits.
+echo "---> Starting Crumple Zone"
+/proc/boot/guardian &

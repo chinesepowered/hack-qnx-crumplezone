@@ -1,0 +1,5 @@
+# Crumple Zone: system clock source for startup-x86 (sorted after
+# definitions.type_qemu so it overrides mkqnximage's QEMU default).
+# @CZ_STARTUP@ is filled in by image/build-image.sh from CZ_CLOCK.
+#undef __STARTUP__
+#define __STARTUP__ @CZ_STARTUP@

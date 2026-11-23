@@ -1,0 +1,34 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# QNX SDP, license and installer: never commit
+qnx800/
+qnxinstall/
+.qnx/
+*.run
+*.lic
+
+# Build outputs and images
+build/
+out/
+*.o
+*.a
+*.so
+*.ifs
+*.img
+*.qcow2
+qemu-image/
+target/image/
+
+# Host tooling
+node_modules/
+dashboard/dist/
+*.log
+!results/**/*.log
+.DS_Store
+__pycache__/
+
+# Recording intermediates
+demo/work/
