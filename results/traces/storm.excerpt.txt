@@ -1,0 +1,221 @@
+TRACEPRINTER version 1.02
+TRACEPARSER LIBRARY version 1.02
+ -- HEADER FILE INFORMATION -- 
+            TRACE_DATE:: Mon Nov 23 20:59:34 2026
+       TRACE_VER_MAJOR:: 2
+       TRACE_VER_MINOR:: 01
+   TRACE_LITTLE_ENDIAN:: TRUE
+        TRACE_ENCODING:: 16 byte events
+       TRACE_BOOT_DATE:: Mon Nov 23 20:34:55 2026
+  TRACE_CYCLES_PER_SEC:: 2097725513
+         TRACE_CPU_NUM:: 3
+         TRACE_SYSNAME:: QNX
+        TRACE_NODENAME:: crumple
+     TRACE_SYS_RELEASE:: 8.0.0
+     TRACE_SYS_VERSION:: 2026/10/30-09:10:05EDT
+         TRACE_MACHINE:: x86pc
+  TRACE_KERNEL_VERSION:: 2.8.0
+     TRACE_SYSPAGE_LEN:: 2424
+       TRACE_FILE_NAME:: /tmp/cz_storm.kev
+TRACE_TRACELOGGER_ARGS:: tracelogger -s 5 -w -F 1 -f /tmp/cz_storm.kev
+ -- KERNEL EVENTS -- 
+t:0x2d3456ff618 CPU:02 COMM            :REC_PULSE          scoid:0x00010001 pid:290840
+t:0x2d34570a368 CPU:02 COMM            :SND_MESSAGE        rcvid:0x00000001 pid:1572886
+t:0x2d3457109d6 CPU:01 COMM            :SND_MESSAGE        rcvid:0x00000002 pid:1572886
+t:0x2d345710f1e CPU:00 THREAD          :THREADY            pid:1 tid:4 priority:255 policy:8
+t:0x2d345715b3e CPU:00 THREAD          :THREADY            pid:1 tid:1 priority:0 policy:1
+t:0x2d345716172 CPU:02 THREAD          :THREPLY            pid:290840 tid:1 priority:60 policy:1
+t:0x2d34571734e CPU:02 THREAD          :THRUNNING          pid:1572886 tid:1 priority:60 policy:2
+t:0x2d34571cbfa CPU:02 COMM            :REC_MESSAGE        rcvid:0x00000001 pid:1572886
+t:0x2d34571d556 CPU:00 THREAD          :THRUNNING          pid:1 tid:4 priority:255 policy:8
+t:0x2d345722536 CPU:00 SYSTEM          :IPI_64             ipicmd = 0x000001,  RESCHED
+t:0x2d34572657c CPU:00 THREAD          :THINTR             pid:1 tid:4 priority:255 policy:8
+t:0x2d345728be2 CPU:00 THREAD          :THRUNNING          pid:290842 tid:1 priority:20 policy:2
+t:0x2d3457294e8 CPU:01 THREAD          :THREPLY            pid:290841 tid:1 priority:55 policy:1
+t:0x2d34572b278 CPU:02 COMM            :REPLY_MESSAGE      tid:1 pid:290840
+t:0x2d34572c82c CPU:01 THREAD          :THRUNNING          pid:1572886 tid:2 priority:55 policy:2
+t:0x2d34572d0f0 CPU:02 THREAD          :THREADY            pid:290840 tid:1 priority:60 policy:1
+t:0x2d345732206 CPU:02 THREAD          :THRECEIVE          pid:1572886 tid:1 priority:60 policy:2
+t:0x2d345733644 CPU:02 THREAD          :THRUNNING          pid:290840 tid:1 priority:60 policy:1
+t:0x2d3457376e4 CPU:01 COMM            :REC_MESSAGE        rcvid:0x00000002 pid:1572886
+t:0x2d34573ed42 CPU:02 COMM            :SND_MESSAGE        rcvid:0x00000001 pid:1572886
+t:0x2d3457435d0 CPU:02 THREAD          :THREPLY            pid:290840 tid:1 priority:60 policy:1
+t:0x2d345744026 CPU:02 THREAD          :THRUNNING          pid:1572886 tid:1 priority:60 policy:2
+t:0x2d345747e40 CPU:02 COMM            :REC_MESSAGE        rcvid:0x00000001 pid:1572886
+t:0x2d34574f9de CPU:02 COMM            :REPLY_MESSAGE      tid:1 pid:290840
+t:0x2d3457508de CPU:02 THREAD          :THREADY            pid:290840 tid:1 priority:60 policy:1
+t:0x2d34575309a CPU:01 COMM            :REPLY_MESSAGE      tid:1 pid:290841
+t:0x2d345753da8 CPU:02 THREAD          :THRECEIVE          pid:1572886 tid:1 priority:60 policy:2
+t:0x2d345754bd8 CPU:02 THREAD          :THRUNNING          pid:290840 tid:1 priority:60 policy:1
+t:0x2d34575643a CPU:01 THREAD          :THREADY            pid:290841 tid:1 priority:55 policy:1
+t:0x2d34575fc0e CPU:01 THREAD          :THRECEIVE          pid:1572886 tid:2 priority:55 policy:2
+t:0x2d345762bf2 CPU:01 THREAD          :THRUNNING          pid:290841 tid:1 priority:55 policy:1
+t:0x2d345767b8c CPU:00 COMM            :SND_MESSAGE        rcvid:0x00000007 pid:282643
+t:0x2d34576ad88 CPU:02 THREAD          :THRECEIVE          pid:290840 tid:1 priority:60 policy:1
+t:0x2d34576c7ee CPU:02 THREAD          :THRUNNING          pid:1 tid:3 priority:0 policy:1
+t:0x2d34577691e CPU:00 THREAD          :THREPLY            pid:290842 tid:1 priority:20 policy:2
+t:0x2d345779620 CPU:00 THREAD          :THRUNNING          pid:282643 tid:1 priority:20 policy:1
+t:0x2d3457853de CPU:00 COMM            :REC_MESSAGE        rcvid:0x00000007 pid:282643
+t:0x2d34578abc6 CPU:01 THREAD          :THRECEIVE          pid:290841 tid:1 priority:55 policy:1
+t:0x2d34578dd2a CPU:01 THREAD          :THRUNNING          pid:1 tid:2 priority:0 policy:1
+t:0x2d3457bc8bc CPU:00 USREVENT        :EVENT:100          STR:"CZ fault inject: storm", d0:0x66205a43 d1:0x746c7561 d2:0x6a6e6920 d3:0x3a746365 d4:0x6f747320 d5:0x00006d72
+t:0x2d3457f9ad4 CPU:00 INTERRUPT       :INT_DELIVER       intr_id:0x80010000(2147549184)
+t:0x2d3457ff2ae CPU:00 THREAD          :THREADY            pid:1 tid:7 priority:254 policy:8
+t:0x2d34580503e CPU:00 THREAD          :THREADY            pid:282643 tid:1 priority:20 policy:1
+t:0x2d34580f19c CPU:00 THREAD          :THRUNNING          pid:1 tid:7 priority:254 policy:8
+t:0x2d34581fa7e CPU:00 SYSTEM          :TIMER              pid:290836 tid:0 timer_id:0 flags:0x00000493 TOLERANT ACTIVE ABSOLUTE TARGET_PROCESS
+t:0x2d345829aac CPU:00 COMM            :SND_PULSE_EXE      scoid:0x00010001 pid:290836
+t:0x2d34582f5e0 CPU:00 THREAD          :THREADY            pid:290836 tid:1 priority:63 policy:1
+t:0x2d34583a9e0 CPU:00 THREAD          :THINTR             pid:1 tid:7 priority:254 policy:8
+t:0x2d34583d006 CPU:00 THREAD          :THRUNNING          pid:290836 tid:1 priority:63 policy:1
+t:0x2d34583e054 CPU:00 SYSTEM          :SEND_IPI_64        target_cpu = 1, ipicmd = 0x000001 RESCHED
+t:0x2d3458569fc CPU:00 COMM            :REC_PULSE          scoid:0x00010001 pid:290836
+t:0x2d34587f24a CPU:01 THREAD          :THREADY            pid:1 tid:5 priority:255 policy:8
+t:0x2d345885602 CPU:00 THREAD          :THRECEIVE          pid:290836 tid:1 priority:63 policy:1
+t:0x2d34588965a CPU:01 THREAD          :THREADY            pid:1 tid:2 priority:0 policy:1
+t:0x2d345889dec CPU:00 THREAD          :THRUNNING          pid:282643 tid:1 priority:20 policy:1
+t:0x2d345893db4 CPU:01 THREAD          :THRUNNING          pid:1 tid:5 priority:255 policy:8
+t:0x2d3458a68c8 CPU:01 INTERRUPT       :INT_DELIVER       intr_id:0x80010000(2147549184)
+t:0x2d3458ab39c CPU:01 THREAD          :THREADY            pid:1 tid:8 priority:254 policy:8
+t:0x2d3458c705c CPU:01 SYSTEM          :IPI_64             ipicmd = 0x000001,  RESCHED
+t:0x2d3458ce350 CPU:01 THREAD          :THINTR             pid:1 tid:5 priority:255 policy:8
+t:0x2d3458d38a2 CPU:01 THREAD          :THRUNNING          pid:1 tid:8 priority:254 policy:8
+t:0x2d3458e76e0 CPU:02 INTERRUPT       :INT_DELIVER       intr_id:0x80010000(2147549184)
+t:0x2d3458eba6c CPU:02 THREAD          :THREADY            pid:1 tid:9 priority:254 policy:8
+t:0x2d3458eef98 CPU:02 THREAD          :THREADY            pid:1 tid:3 priority:0 policy:1
+t:0x2d3458f789a CPU:01 THREAD          :THINTR             pid:1 tid:8 priority:254 policy:8
+t:0x2d3458f9382 CPU:01 THREAD          :THRUNNING          pid:1 tid:2 priority:0 policy:1
+t:0x2d3458f97e4 CPU:02 THREAD          :THRUNNING          pid:1 tid:9 priority:254 policy:8
+t:0x2d345907472 CPU:00 COMM            :SND_MESSAGE        rcvid:0x00000013 pid:1
+t:0x2d345908200 CPU:02 SYSTEM          :TIMER              pid:290840 tid:0 timer_id:0 flags:0x00000493 TOLERANT ACTIVE ABSOLUTE TARGET_PROCESS
+t:0x2d345910ff4 CPU:00 THREAD          :THREPLY            pid:282643 tid:1 priority:20 policy:1
+t:0x2d3459118ce CPU:02 COMM            :SND_PULSE_EXE      scoid:0x00010001 pid:290840
+t:0x2d345912ad8 CPU:00 THREAD          :THRUNNING          pid:1 tid:21 priority:20 policy:2
+t:0x2d345916ace CPU:00 COMM            :REC_MESSAGE        rcvid:0x00000013 pid:1
+t:0x2d345919358 CPU:02 THREAD          :THREADY            pid:290840 tid:1 priority:60 policy:1
+t:0x2d345927f8c CPU:02 THREAD          :THINTR             pid:1 tid:9 priority:254 policy:8
+t:0x2d34592ae7a CPU:02 THREAD          :THRUNNING          pid:290840 tid:1 priority:60 policy:1
+t:0x2d34593376c CPU:02 COMM            :REC_PULSE          scoid:0x00010001 pid:290840
+t:0x2d345948f30 CPU:02 COMM            :SND_MESSAGE        rcvid:0x00000001 pid:1572886
+t:0x2d34595b45a CPU:02 THREAD          :THREPLY            pid:290840 tid:1 priority:60 policy:1
+t:0x2d34595d586 CPU:02 THREAD          :THRUNNING          pid:1572886 tid:1 priority:60 policy:2
+t:0x2d34596a908 CPU:02 COMM            :REC_MESSAGE        rcvid:0x00000001 pid:1572886
+t:0x2d345983c24 CPU:02 COMM            :REPLY_MESSAGE      tid:1 pid:290840
+t:0x2d3459863a0 CPU:00 COMM            :REPLY_MESSAGE      tid:1 pid:282643
+t:0x2d345986910 CPU:02 THREAD          :THREADY            pid:290840 tid:1 priority:60 policy:1
+t:0x2d34598990a CPU:00 THREAD          :THREADY            pid:282643 tid:1 priority:20 policy:1
+t:0x2d34598bb48 CPU:00 SYSTEM          :SEND_IPI_64        target_cpu = 1, ipicmd = 0x000001 RESCHED
+t:0x2d34598efbc CPU:02 THREAD          :THRECEIVE          pid:1572886 tid:1 priority:60 policy:2
+t:0x2d345991e98 CPU:02 THREAD          :THRUNNING          pid:290840 tid:1 priority:60 policy:1
+t:0x2d3459a0944 CPU:00 THREAD          :THRECEIVE          pid:1 tid:21 priority:20 policy:2
+t:0x2d3459a362e CPU:00 THREAD          :THRUNNING          pid:282643 tid:1 priority:20 policy:1
+t:0x2d3459b4cca CPU:00 COMM            :REPLY_MESSAGE      tid:3 pid:1642524
+t:0x2d3459b6026 CPU:00 THREAD          :THREADY            pid:1642524 tid:3 priority:8 policy:2
+t:0x2d3459b6a30 CPU:00 SYSTEM          :SEND_IPI_64        target_cpu = 1, ipicmd = 0x000001 RESCHED
+t:0x2d3459b94b0 CPU:02 THREAD          :THRECEIVE          pid:290840 tid:1 priority:60 policy:1
+t:0x2d3459b9d58 CPU:00 COMM            :REPLY_MESSAGE      tid:1 pid:290842
+t:0x2d3459bab28 CPU:00 THREAD          :THREADY            pid:290842 tid:1 priority:20 policy:2
+t:0x2d3459bba10 CPU:00 SYSTEM          :SEND_IPI_64        target_cpu = 1, ipicmd = 0x000001 RESCHED
+t:0x2d3459bcef4 CPU:02 THREAD          :THRUNNING          pid:290842 tid:1 priority:20 policy:2
+t:0x2d3459c0110 CPU:00 THREAD          :THRECEIVE          pid:282643 tid:1 priority:20 policy:1
+t:0x2d3459c13c8 CPU:00 THREAD          :THRUNNING          pid:1642524 tid:3 priority:8 policy:2
+t:0x2d3459c5460 CPU:01 THREAD          :THREADY            pid:1 tid:5 priority:255 policy:8
+t:0x2d3459ca852 CPU:01 THREAD          :THREADY            pid:1 tid:2 priority:0 policy:1
+t:0x2d3459d2e8e CPU:01 THREAD          :THRUNNING          pid:1 tid:5 priority:255 policy:8
+t:0x2d3459d5d72 CPU:00 COMM            :SND_MESSAGE        rcvid:0x00020008 pid:282643
+t:0x2d3459d7af6 CPU:01 SYSTEM          :IPI_64             ipicmd = 0x000001,  RESCHED
+t:0x2d3459dbeb2 CPU:01 THREAD          :THINTR             pid:1 tid:5 priority:255 policy:8
+t:0x2d3459de5a6 CPU:00 THREAD          :THREPLY            pid:1642524 tid:3 priority:8 policy:2
+t:0x2d3459dfa88 CPU:00 THREAD          :THRUNNING          pid:282643 tid:1 priority:8 policy:1
+t:0x2d3459e005e CPU:01 THREAD          :THRUNNING          pid:1 tid:2 priority:0 policy:1
+t:0x2d3459e6748 CPU:02 COMM            :SND_MESSAGE        rcvid:0x00000003 pid:163853
+t:0x2d3459e7efa CPU:00 COMM            :REC_MESSAGE        rcvid:0x00020008 pid:282643
+t:0x2d3459ea2f0 CPU:02 THREAD          :THREPLY            pid:290842 tid:1 priority:20 policy:2
+t:0x2d3459eaf7a CPU:02 THREAD          :THRUNNING          pid:163853 tid:47 priority:21 policy:2
+t:0x2d3459f20ee CPU:02 COMM            :REC_MESSAGE        rcvid:0x00000003 pid:163853
+t:0x2d345a1c0be CPU:00 INTERRUPT       :INT_DELIVER       intr_id:0x80010000(2147549184)
+t:0x2d345a21590 CPU:00 THREAD          :THREADY            pid:1 tid:7 priority:254 policy:8
+t:0x2d345a25772 CPU:00 THREAD          :THREADY            pid:282643 tid:1 priority:8 policy:1
+t:0x2d345a2f68c CPU:00 THREAD          :THRUNNING          pid:1 tid:7 priority:254 policy:8
+t:0x2d345a403ae CPU:00 SYSTEM          :TIMER              pid:290836 tid:0 timer_id:0 flags:0x00000493 TOLERANT ACTIVE ABSOLUTE TARGET_PROCESS
+t:0x2d345a4b9a0 CPU:00 COMM            :SND_PULSE_EXE      scoid:0x00010001 pid:290836
+t:0x2d345a522d2 CPU:00 THREAD          :THREADY            pid:290836 tid:1 priority:63 policy:1
+t:0x2d345a5f5dc CPU:00 THREAD          :THINTR             pid:1 tid:7 priority:254 policy:8
+t:0x2d345a62fb2 CPU:00 THREAD          :THRUNNING          pid:290836 tid:1 priority:63 policy:1
+t:0x2d345a647fc CPU:00 SYSTEM          :SEND_IPI_64        target_cpu = 1, ipicmd = 0x000001 RESCHED
+t:0x2d345a74850 CPU:00 COMM            :REC_PULSE          scoid:0x00010001 pid:290836
+t:0x2d345a7a9f4 CPU:02 INTERRUPT       :INT_DELIVER       intr_id:0x80010000(2147549184)
+t:0x2d345a7acd8 CPU:01 THREAD          :THREADY            pid:1 tid:5 priority:255 policy:8
+t:0x2d345a7de56 CPU:02 THREAD          :THREADY            pid:1 tid:9 priority:254 policy:8
+t:0x2d345a7e4e0 CPU:01 THREAD          :THREADY            pid:1 tid:2 priority:0 policy:1
+t:0x2d345a81e40 CPU:02 THREAD          :THREADY            pid:163853 tid:47 priority:21 policy:2
+t:0x2d345a8532a CPU:01 THREAD          :THRUNNING          pid:1 tid:5 priority:255 policy:8
+t:0x2d345a89b10 CPU:02 THREAD          :THRUNNING          pid:1 tid:9 priority:254 policy:8
+t:0x2d345a8a23a CPU:01 INTERRUPT       :INT_DELIVER       intr_id:0x80010000(2147549184)
+t:0x2d345a8be36 CPU:01 THREAD          :THREADY            pid:1 tid:8 priority:254 policy:8
+t:0x2d345ab06d0 CPU:00 THREAD          :THRECEIVE          pid:290836 tid:1 priority:63 policy:1
+t:0x2d345ac0dd0 CPU:00 THREAD          :THRUNNING          pid:163853 tid:47 priority:21 policy:2
+t:0x2d345ac5382 CPU:01 CONTROL         :BUFFER_END         cookie1 = e6e6e6e6, cookie2 = e6e6e6e6
+t:0x2d345ac5382 CPU:01 CONTROL         :TIME               msb:0x000002d3 lsb(offset):0x45ac5382
+t:0x2d345ac5382 CPU:01 CONTROL         :BUFFER             sequence = 38, num_events = 1010
+t:0x2d345ac5382 CPU:01 SYSTEM          :IPI_64             ipicmd = 0x000001,  RESCHED
+t:0x2d345ad0412 CPU:01 THREAD          :THREADY            pid:1732639 tid:4 priority:10 policy:2
+t:0x2d345ad736e CPU:01 THREAD          :THINTR             pid:1 tid:5 priority:255 policy:8
+t:0x2d345ada68a CPU:01 THREAD          :THRUNNING          pid:1 tid:8 priority:254 policy:8
+t:0x2d345ae5d72 CPU:01 SYSTEM          :TIMER              pid:290841 tid:0 timer_id:0 flags:0x00000493 TOLERANT ACTIVE ABSOLUTE TARGET_PROCESS
+t:0x2d345af146c CPU:01 COMM            :SND_PULSE_EXE      scoid:0x00010001 pid:290841
+t:0x2d345afbc4c CPU:01 THREAD          :THREADY            pid:290841 tid:1 priority:55 policy:1
+t:0x2d345b04a66 CPU:01 THREAD          :THINTR             pid:1 tid:8 priority:254 policy:8
+t:0x2d345b05f8a CPU:01 THREAD          :THRUNNING          pid:290841 tid:1 priority:55 policy:1
+t:0x2d345b0e20a CPU:01 COMM            :REC_PULSE          scoid:0x00010001 pid:290841
+t:0x2d345b22d1e CPU:01 COMM            :SND_MESSAGE        rcvid:0x00000002 pid:1572886
+t:0x2d345b68802 CPU:01 THREAD          :THREPLY            pid:290841 tid:1 priority:55 policy:1
+t:0x2d345b6bc84 CPU:01 THREAD          :THRUNNING          pid:1572886 tid:2 priority:55 policy:2
+t:0x2d345b781b2 CPU:00 INTERRUPT       :INT_DELIVER       intr_id:0x101(257)
+t:0x2d345b7a5f0 CPU:01 COMM            :REC_MESSAGE        rcvid:0x00000002 pid:1572886
+t:0x2d345b7e798 CPU:00 THREAD          :THREADY            pid:163853 tid:41 priority:21 policy:2
+t:0x2d345b98886 CPU:01 COMM            :REPLY_MESSAGE      tid:1 pid:290841
+t:0x2d345b9bc5c CPU:01 THREAD          :THREADY            pid:290841 tid:1 priority:55 policy:1
+t:0x2d345b9cc06 CPU:00 COMM            :REPLY_MESSAGE      tid:1 pid:290842
+t:0x2d345ba15f4 CPU:00 THREAD          :THREADY            pid:290842 tid:1 priority:20 policy:2
+t:0x2d345ba5adc CPU:01 THREAD          :THRECEIVE          pid:1572886 tid:2 priority:55 policy:2
+t:0x2d345ba8f34 CPU:01 THREAD          :THRUNNING          pid:290841 tid:1 priority:55 policy:1
+t:0x2d345bcc698 CPU:00 THREAD          :THRECEIVE          pid:163853 tid:47 priority:21 policy:2
+t:0x2d345bddede CPU:00 THREAD          :THRUNNING          pid:163853 tid:41 priority:21 policy:2
+t:0x2d345be484a CPU:00 INTERRUPT       :INT_DELIVER       intr_id:0x80010000(2147549184)
+t:0x2d345be6420 CPU:00 THREAD          :THREADY            pid:1 tid:7 priority:254 policy:8
+t:0x2d345be88f4 CPU:01 THREAD          :THRECEIVE          pid:290841 tid:1 priority:55 policy:1
+t:0x2d345be9452 CPU:00 THREAD          :THREADY            pid:163853 tid:41 priority:21 policy:2
+t:0x2d345bec7ce CPU:01 THREAD          :THRUNNING          pid:163853 tid:41 priority:21 policy:2
+t:0x2d345bf2204 CPU:00 THREAD          :THRUNNING          pid:1 tid:7 priority:254 policy:8
+t:0x2d345bf94d0 CPU:01 THREAD          :THREADY            pid:163853 tid:41 priority:21 policy:2
+t:0x2d345bfeb9a CPU:00 SYSTEM          :TIMER              pid:290836 tid:0 timer_id:0 flags:0x00000493 TOLERANT ACTIVE ABSOLUTE TARGET_PROCESS
+t:0x2d345c00cd8 CPU:01 THREAD          :THRUNNING          pid:163853 tid:41 priority:21 policy:2
+t:0x2d345c08d9a CPU:00 COMM            :SND_PULSE_EXE      scoid:0x00010001 pid:290836
+t:0x2d345c0d304 CPU:00 THREAD          :THREADY            pid:290836 tid:1 priority:63 policy:1
+t:0x2d345c17e6e CPU:00 THREAD          :THINTR             pid:1 tid:7 priority:254 policy:8
+t:0x2d345c1981a CPU:00 THREAD          :THRUNNING          pid:290836 tid:1 priority:63 policy:1
+t:0x2d345c293ec CPU:00 COMM            :REC_PULSE          scoid:0x00010001 pid:290836
+t:0x2d345c6150e CPU:00 THREAD          :THRECEIVE          pid:290836 tid:1 priority:63 policy:1
+t:0x2d345c66fec CPU:00 THREAD          :THRUNNING          pid:290842 tid:1 priority:20 policy:2
+t:0x2d345c8e0ee CPU:00 COMM            :SND_MESSAGE        rcvid:0x00000003 pid:163853
+t:0x2d345c94128 CPU:00 THREAD          :THREPLY            pid:290842 tid:1 priority:20 policy:2
+t:0x2d345c95572 CPU:00 THREAD          :THRUNNING          pid:163853 tid:47 priority:21 policy:2
+t:0x2d345c9f41c CPU:00 COMM            :REC_MESSAGE        rcvid:0x00000003 pid:163853
+t:0x2d345caaa10 CPU:01 INTERRUPT       :INT_DELIVER       intr_id:0x80010000(2147549184)
+t:0x2d345caf638 CPU:01 THREAD          :THREADY            pid:1 tid:8 priority:254 policy:8
+t:0x2d345ccb770 CPU:01 THREAD          :THREADY            pid:163853 tid:41 priority:21 policy:2
+t:0x2d345cd8c44 CPU:01 THREAD          :THRUNNING          pid:1 tid:8 priority:254 policy:8
+t:0x2d345cf152c CPU:01 THREAD          :THINTR             pid:1 tid:8 priority:254 policy:8
+t:0x2d345cf9a2a CPU:00 THREAD          :THMUTEX            pid:163853 tid:47 priority:21 policy:2
+t:0x2d345cfe190 CPU:01 THREAD          :THRUNNING          pid:163853 tid:41 priority:21 policy:2
+t:0x2d345d095d4 CPU:00 THREAD          :THRUNNING          pid:282643 tid:1 priority:8 policy:1
+t:0x2d345d18d3a CPU:01 THREAD          :THREADY            pid:163853 tid:47 priority:21 policy:2
+t:0x2d345d25728 CPU:00 COMM            :REPLY_MESSAGE      tid:3 pid:1642524
+t:0x2d345d2a25a CPU:00 THREAD          :THREADY            pid:1642524 tid:3 priority:8 policy:2
+t:0x2d345d31aea CPU:02 SYSTEM          :TIMER              pid:290840 tid:0 timer_id:0 flags:0x00000493 TOLERANT ACTIVE ABSOLUTE TARGET_PROCESS
+t:0x2d345d330ba CPU:00 THREAD          :THRECEIVE          pid:282643 tid:1 priority:8 policy:1
+t:0x2d345d35f6c CPU:00 THREAD          :THRUNNING          pid:163853 tid:47 priority:21 policy:2
+t:0x2d345d3990a CPU:01 THREAD          :THINTR             pid:163853 tid:41 priority:21 policy:2
+t:0x2d345d3bffa CPU:01 THREAD          :THRUNNING          pid:1732639 tid:4 priority:10 policy:2
+t:0x2d345d3c6b2 CPU:02 COMM            :SND_PULSE_EXE      scoid:0x00010001 pid:290840

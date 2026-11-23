@@ -1,0 +1,3288 @@
+{
+ "recorded": "2026-11-23 21:00 UTC",
+ "platform": {
+  "os": "QNX 8.0.0",
+  "accel": "TCG",
+  "vcpus": 3
+ },
+ "host_noise": {
+  "cpu": 3,
+  "n": 5000,
+  "p50_us": 37.2,
+  "p99_us": 502.5,
+  "p999_us": 7067.4,
+  "max_us": 9981
+ },
+ "runs": [
+  {
+   "id": "crash-1406890",
+   "fault": "crash",
+   "label": "Crash infotainment",
+   "ok": true,
+   "t_fault_ns": 1406889934564,
+   "window_ms": 3000,
+   "brake": {
+    "baseline": {
+     "iterations": 2986,
+     "expected": 3000,
+     "deadline_misses": 38,
+     "skipped_releases": 14,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 2986,
+      "mean": 166,
+      "p50": 137.7,
+      "p99": 719.8,
+      "p999": 2806.9,
+      "max": 3045.7
+     },
+     "exec_us": {
+      "n": 2986,
+      "mean": 164.5,
+      "p50": 155.8,
+      "p99": 346,
+      "p999": 729.3,
+      "max": 5396.2
+     },
+     "sensor_io_us": {
+      "n": 2986,
+      "mean": 157.3,
+      "p50": 148.6,
+      "p99": 337.9,
+      "p999": 721.4,
+      "max": 5387.2
+     },
+     "jitter_max_us": 4996.6
+    },
+    "fault": {
+     "iterations": 2988,
+     "expected": 3000,
+     "deadline_misses": 45,
+     "skipped_releases": 12,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 2988,
+      "mean": 169.7,
+      "p50": 144.1,
+      "p99": 649.8,
+      "p999": 2984.9,
+      "max": 4789.5
+     },
+     "exec_us": {
+      "n": 2988,
+      "mean": 173.2,
+      "p50": 160.1,
+      "p99": 424.9,
+      "p999": 1067.9,
+      "max": 1688.7
+     },
+     "sensor_io_us": {
+      "n": 2988,
+      "mean": 165.4,
+      "p50": 152.8,
+      "p99": 407.4,
+      "p999": 1057.6,
+      "max": 1680.8
+     },
+     "jitter_max_us": 4529.7
+    }
+   },
+   "steer": {
+    "baseline": {
+     "iterations": 1499,
+     "expected": 1500,
+     "deadline_misses": 8,
+     "skipped_releases": 1,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 1499,
+      "mean": 281,
+      "p50": 252.6,
+      "p99": 1172.7,
+      "p999": 3796.1,
+      "max": 4092.1
+     },
+     "exec_us": {
+      "n": 1499,
+      "mean": 164.8,
+      "p50": 158.7,
+      "p99": 287.7,
+      "p999": 487,
+      "max": 1848.1
+     },
+     "sensor_io_us": {
+      "n": 1499,
+      "mean": 159.7,
+      "p50": 153.8,
+      "p99": 282.5,
+      "p999": 481.4,
+      "max": 1841.3
+     },
+     "jitter_max_us": 3754.1
+    },
+    "fault": {
+     "iterations": 1498,
+     "expected": 1500,
+     "deadline_misses": 9,
+     "skipped_releases": 2,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 1498,
+      "mean": 297.7,
+      "p50": 267.9,
+      "p99": 915.8,
+      "p999": 3419.6,
+      "max": 6544.3
+     },
+     "exec_us": {
+      "n": 1498,
+      "mean": 169,
+      "p50": 165,
+      "p99": 325.2,
+      "p999": 577.5,
+      "max": 1210.5
+     },
+     "sensor_io_us": {
+      "n": 1498,
+      "mean": 163.7,
+      "p50": 159.1,
+      "p99": 320.8,
+      "p999": 572.2,
+      "max": 1202.8
+     },
+     "jitter_max_us": 5447.5
+    }
+   },
+   "brake_off_cpu_iterations": 0,
+   "brake_noise": {
+    "windows": 4,
+    "max": 101,
+    "mean": 59.3
+   },
+   "steer_noise": {
+    "windows": 4,
+    "max": 12,
+    "mean": 9
+   },
+   "brake_miss_excess": false,
+   "steer_miss_excess": false,
+   "recovery": {
+    "process": "infotainment",
+    "cause": "SIGSEGV",
+    "detection_path": "channel disconnect",
+    "fault_to_detect_ms": 5.037,
+    "detect_to_ready_ms": 7.094,
+    "fault_to_ready_ms": 12.131,
+    "within_budget": true,
+    "new_pid": 1564694,
+    "old_pid": 1527826
+   },
+   "safety": {
+    "brake_safe_entries": 0,
+    "brake_link_lost_entries": 0,
+    "brake_stale_entries": 0,
+    "brake_first_detect_ms": null,
+    "brake_safe_duration_ms": null,
+    "brake_safe_reason": null,
+    "steer_safe_entries": 0
+   },
+   "cluster": {
+    "baseline_display_latency_max_us": 406,
+    "fault_display_latency_max_us": 332,
+    "media_messages": 5
+   },
+   "infotainment": {
+    "peak_alloc_mb": 0,
+    "flood_messages": 0,
+    "restarts": 1
+   },
+   "cpu_peak_pct": [
+    24.7,
+    29.3,
+    42.4
+   ],
+   "events": [
+    {
+     "t": "ev",
+     "ts": 1406889945280,
+     "src": "guardian",
+     "kind": "fault_inject",
+     "proc": "infotainment",
+     "pid": 1527826,
+     "a": 1,
+     "v0": 4000,
+     "v1": 0,
+     "text": "crash"
+    },
+    {
+     "t": "ev",
+     "ts": 1406894975706,
+     "src": "guardian",
+     "kind": "death",
+     "proc": "infotainment",
+     "pid": 1527826,
+     "a": 2,
+     "v0": 5036814,
+     "v1": 0,
+     "text": "channel disconnect"
+    },
+    {
+     "t": "ev",
+     "ts": 1406899801268,
+     "src": "guardian",
+     "kind": "spawn",
+     "proc": "infotainment",
+     "pid": 1564694,
+     "a": 8,
+     "v0": 1406895842267,
+     "v1": 0,
+     "text": "infotainment"
+    },
+    {
+     "t": "ev",
+     "ts": 1406900233129,
+     "src": "guardian",
+     "kind": "exit_status",
+     "proc": "infotainment",
+     "pid": 1527826,
+     "a": 11,
+     "v0": 0,
+     "v1": 0,
+     "text": "SIGSEGV"
+    },
+    {
+     "t": "ev",
+     "ts": 1406902069756,
+     "src": "guardian",
+     "kind": "ready",
+     "proc": "infotainment",
+     "pid": 1564694,
+     "a": 0,
+     "v0": 6223387,
+     "v1": 0,
+     "text": "infotainment"
+    },
+    {
+     "t": "ev",
+     "ts": 1406902073847,
+     "src": "guardian",
+     "kind": "restart",
+     "proc": "infotainment",
+     "pid": 1564694,
+     "a": 1,
+     "v0": 12131090,
+     "v1": 7094276,
+     "text": "within budget"
+    },
+    {
+     "t": "ev",
+     "ts": 1406889411696,
+     "src": "telemetry",
+     "kind": "stats_reset",
+     "proc": "telemetry",
+     "pid": 290842,
+     "a": 0,
+     "v0": 0,
+     "v1": 0,
+     "text": "window reset"
+    }
+   ]
+  },
+  {
+   "id": "storm-1415301",
+   "fault": "storm",
+   "label": "CPU storm",
+   "ok": true,
+   "t_fault_ns": 1415300608548,
+   "window_ms": 7000,
+   "brake": {
+    "baseline": {
+     "iterations": 6959,
+     "expected": 7000,
+     "deadline_misses": 129,
+     "skipped_releases": 41,
+     "stale_iterations": 14,
+     "safe_iterations": 16,
+     "latency_us": {
+      "n": 6959,
+      "mean": 173,
+      "p50": 142,
+      "p99": 838.9,
+      "p999": 2631.9,
+      "max": 3461.1
+     },
+     "exec_us": {
+      "n": 6959,
+      "mean": 168.7,
+      "p50": 157.2,
+      "p99": 378,
+      "p999": 1335,
+      "max": 4748.4
+     },
+     "sensor_io_us": {
+      "n": 6959,
+      "mean": 159.4,
+      "p50": 148.2,
+      "p99": 365.7,
+      "p999": 1294.1,
+      "max": 4741.8
+     },
+     "jitter_max_us": 3843.8
+    },
+    "fault": {
+     "iterations": 6944,
+     "expected": 7000,
+     "deadline_misses": 119,
+     "skipped_releases": 56,
+     "stale_iterations": 11,
+     "safe_iterations": 17,
+     "latency_us": {
+      "n": 6944,
+      "mean": 149.3,
+      "p50": 116.2,
+      "p99": 602.7,
+      "p999": 2996,
+      "max": 12803.4
+     },
+     "exec_us": {
+      "n": 6944,
+      "mean": 148.3,
+      "p50": 134,
+      "p99": 367.8,
+      "p999": 1239.7,
+      "max": 4489
+     },
+     "sensor_io_us": {
+      "n": 6944,
+      "mean": 141.9,
+      "p50": 128.3,
+      "p99": 358.8,
+      "p999": 947,
+      "max": 4482.2
+     },
+     "jitter_max_us": 12707.8
+    }
+   },
+   "steer": {
+    "baseline": {
+     "iterations": 3495,
+     "expected": 3500,
+     "deadline_misses": 27,
+     "skipped_releases": 5,
+     "stale_iterations": 1,
+     "safe_iterations": 3,
+     "latency_us": {
+      "n": 3495,
+      "mean": 303.4,
+      "p50": 270.8,
+      "p99": 1200.4,
+      "p999": 3583,
+      "max": 6544.3
+     },
+     "exec_us": {
+      "n": 3495,
+      "mean": 174.8,
+      "p50": 165.9,
+      "p99": 413.9,
+      "p999": 1210.5,
+      "max": 3024.5
+     },
+     "sensor_io_us": {
+      "n": 3495,
+      "mean": 169.4,
+      "p50": 160.8,
+      "p99": 402.5,
+      "p999": 1202.8,
+      "max": 3020
+     },
+     "jitter_max_us": 5447.5
+    },
+    "fault": {
+     "iterations": 3492,
+     "expected": 3500,
+     "deadline_misses": 17,
+     "skipped_releases": 8,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 3492,
+      "mean": 241.6,
+      "p50": 205.3,
+      "p99": 706.6,
+      "p999": 3247.7,
+      "max": 15515.8
+     },
+     "exec_us": {
+      "n": 3492,
+      "mean": 150.5,
+      "p50": 145.2,
+      "p99": 289,
+      "p999": 612.7,
+      "max": 1228.1
+     },
+     "sensor_io_us": {
+      "n": 3492,
+      "mean": 145.8,
+      "p50": 140.8,
+      "p99": 284.4,
+      "p999": 608,
+      "max": 1222.6
+     },
+     "jitter_max_us": 15390.1
+    }
+   },
+   "brake_off_cpu_iterations": 0,
+   "brake_noise": {
+    "windows": 0,
+    "max": 0,
+    "mean": 0
+   },
+   "steer_noise": {
+    "windows": 0,
+    "max": 0,
+    "mean": 0
+   },
+   "brake_miss_excess": false,
+   "steer_miss_excess": false,
+   "recovery": null,
+   "safety": {
+    "brake_safe_entries": 3,
+    "brake_link_lost_entries": 0,
+    "brake_stale_entries": 3,
+    "brake_first_detect_ms": 1094.971,
+    "brake_safe_duration_ms": 2.32,
+    "brake_safe_reason": "stale sample",
+    "steer_safe_entries": 0
+   },
+   "cluster": {
+    "baseline_display_latency_max_us": 238,
+    "fault_display_latency_max_us": 354,
+    "media_messages": 5
+   },
+   "infotainment": {
+    "peak_alloc_mb": 0,
+    "flood_messages": 0,
+    "restarts": 0
+   },
+   "cpu_peak_pct": [
+    100,
+    100,
+    100
+   ],
+   "events": [
+    {
+     "t": "ev",
+     "ts": 1415300616074,
+     "src": "guardian",
+     "kind": "fault_inject",
+     "proc": "infotainment",
+     "pid": 1564694,
+     "a": 2,
+     "v0": 4000,
+     "v1": 0,
+     "text": "storm"
+    },
+    {
+     "t": "ev",
+     "ts": 1415300473699,
+     "src": "telemetry",
+     "kind": "stats_reset",
+     "proc": "telemetry",
+     "pid": 290842,
+     "a": 0,
+     "v0": 0,
+     "v1": 0,
+     "text": "window reset"
+    },
+    {
+     "t": "ev",
+     "ts": 1416395579330,
+     "src": "brake_ctl",
+     "kind": "safe_enter",
+     "proc": "brake_ctl",
+     "pid": 290840,
+     "a": 3,
+     "v0": 17326820,
+     "v1": 1411353,
+     "text": "SAFE_HOLD"
+    },
+    {
+     "t": "ev",
+     "ts": 1416397750572,
+     "src": "brake_ctl",
+     "kind": "safe_exit",
+     "proc": "brake_ctl",
+     "pid": 290840,
+     "a": 0,
+     "v0": 2319501,
+     "v1": 1411368,
+     "text": "normal control"
+    },
+    {
+     "t": "ev",
+     "ts": 1417397267902,
+     "src": "brake_ctl",
+     "kind": "safe_enter",
+     "proc": "brake_ctl",
+     "pid": 290840,
+     "a": 3,
+     "v0": 16951696,
+     "v1": 1412360,
+     "text": "SAFE_HOLD"
+    },
+    {
+     "t": "ev",
+     "ts": 1417401685947,
+     "src": "brake_ctl",
+     "kind": "safe_exit",
+     "proc": "brake_ctl",
+     "pid": 290840,
+     "a": 0,
+     "v0": 4589292,
+     "v1": 1412372,
+     "text": "normal control"
+    },
+    {
+     "t": "ev",
+     "ts": 1418391830801,
+     "src": "brake_ctl",
+     "kind": "safe_enter",
+     "proc": "brake_ctl",
+     "pid": 290840,
+     "a": 3,
+     "v0": 10676944,
+     "v1": 1413362,
+     "text": "SAFE_HOLD"
+    },
+    {
+     "t": "ev",
+     "ts": 1418402752653,
+     "src": "brake_ctl",
+     "kind": "safe_exit",
+     "proc": "brake_ctl",
+     "pid": 290840,
+     "a": 0,
+     "v0": 10966810,
+     "v1": 1413373,
+     "text": "normal control"
+    },
+    {
+     "t": "ev",
+     "ts": 1419306523444,
+     "src": "guardian",
+     "kind": "fault_end",
+     "proc": "infotainment",
+     "pid": 1564694,
+     "a": 2,
+     "v0": 4005061014,
+     "v1": 0,
+     "text": "storm"
+    }
+   ]
+  },
+  {
+   "id": "leak-1427684",
+   "fault": "leak",
+   "label": "Memory leak",
+   "ok": true,
+   "t_fault_ns": 1427683696605,
+   "window_ms": 8500,
+   "brake": {
+    "baseline": {
+     "iterations": 8434,
+     "expected": 8500,
+     "deadline_misses": 164,
+     "skipped_releases": 66,
+     "stale_iterations": 1,
+     "safe_iterations": 3,
+     "latency_us": {
+      "n": 8434,
+      "mean": 177.1,
+      "p50": 146.9,
+      "p99": 792.1,
+      "p999": 2561,
+      "max": 8035.1
+     },
+     "exec_us": {
+      "n": 8434,
+      "mean": 177.9,
+      "p50": 161.5,
+      "p99": 418,
+      "p999": 1505.3,
+      "max": 11507.6
+     },
+     "sensor_io_us": {
+      "n": 8434,
+      "mean": 170.3,
+      "p50": 154.2,
+      "p99": 406.4,
+      "p999": 1475.2,
+      "max": 11500.5
+     },
+     "jitter_max_us": 10641.4
+    },
+    "fault": {
+     "iterations": 8451,
+     "expected": 8500,
+     "deadline_misses": 157,
+     "skipped_releases": 49,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 8451,
+      "mean": 177.1,
+      "p50": 144.4,
+      "p99": 808.8,
+      "p999": 2662.9,
+      "max": 5996.1
+     },
+     "exec_us": {
+      "n": 8451,
+      "mean": 180.9,
+      "p50": 165.9,
+      "p99": 432.6,
+      "p999": 1139.7,
+      "max": 3400.2
+     },
+     "sensor_io_us": {
+      "n": 8451,
+      "mean": 171.2,
+      "p50": 156.3,
+      "p99": 412,
+      "p999": 1130.3,
+      "max": 3389.4
+     },
+     "jitter_max_us": 5801
+    }
+   },
+   "steer": {
+    "baseline": {
+     "iterations": 4249,
+     "expected": 4250,
+     "deadline_misses": 9,
+     "skipped_releases": 1,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 4249,
+      "mean": 299,
+      "p50": 282.8,
+      "p99": 736.9,
+      "p999": 2382.3,
+      "max": 3436
+     },
+     "exec_us": {
+      "n": 4249,
+      "mean": 181,
+      "p50": 174.3,
+      "p99": 357,
+      "p999": 1042.7,
+      "max": 5038.6
+     },
+     "sensor_io_us": {
+      "n": 4249,
+      "mean": 175.3,
+      "p50": 168.6,
+      "p99": 348.4,
+      "p999": 1037.7,
+      "max": 5032.5
+     },
+     "jitter_max_us": 3124.4
+    },
+    "fault": {
+     "iterations": 4248,
+     "expected": 4250,
+     "deadline_misses": 14,
+     "skipped_releases": 2,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 4248,
+      "mean": 286.8,
+      "p50": 262,
+      "p99": 898.4,
+      "p999": 2278.6,
+      "max": 5310.5
+     },
+     "exec_us": {
+      "n": 4248,
+      "mean": 175.4,
+      "p50": 162.6,
+      "p99": 398.4,
+      "p999": 1247.9,
+      "max": 3073.4
+     },
+     "sensor_io_us": {
+      "n": 4248,
+      "mean": 170.1,
+      "p50": 157.6,
+      "p99": 391.7,
+      "p999": 1230.7,
+      "max": 3068
+     },
+     "jitter_max_us": 5024
+    }
+   },
+   "brake_off_cpu_iterations": 0,
+   "brake_noise": {
+    "windows": 0,
+    "max": 0,
+    "mean": 0
+   },
+   "steer_noise": {
+    "windows": 0,
+    "max": 0,
+    "mean": 0
+   },
+   "brake_miss_excess": false,
+   "steer_miss_excess": false,
+   "recovery": {
+    "process": "infotainment",
+    "cause": "SIGABRT",
+    "detection_path": "channel disconnect",
+    "fault_to_detect_ms": null,
+    "detect_to_ready_ms": 6.961,
+    "fault_to_ready_ms": null,
+    "within_budget": true,
+    "new_pid": 1572882,
+    "old_pid": 1564694
+   },
+   "safety": {
+    "brake_safe_entries": 0,
+    "brake_link_lost_entries": 0,
+    "brake_stale_entries": 0,
+    "brake_first_detect_ms": null,
+    "brake_safe_duration_ms": null,
+    "brake_safe_reason": null,
+    "steer_safe_entries": 0
+   },
+   "cluster": {
+    "baseline_display_latency_max_us": 523,
+    "fault_display_latency_max_us": 424,
+    "media_messages": 12
+   },
+   "infotainment": {
+    "peak_alloc_mb": 188,
+    "flood_messages": 0,
+    "restarts": 1
+   },
+   "cpu_peak_pct": [
+    37,
+    42.8,
+    48.3
+   ],
+   "events": [
+    {
+     "t": "ev",
+     "ts": 1427683704633,
+     "src": "guardian",
+     "kind": "fault_inject",
+     "proc": "infotainment",
+     "pid": 1564694,
+     "a": 3,
+     "v0": 4000,
+     "v1": 0,
+     "text": "leak"
+    },
+    {
+     "t": "ev",
+     "ts": 1427683411086,
+     "src": "telemetry",
+     "kind": "stats_reset",
+     "proc": "telemetry",
+     "pid": 290842,
+     "a": 0,
+     "v0": 0,
+     "v1": 0,
+     "text": "window reset"
+    },
+    {
+     "t": "ev",
+     "ts": 1430153698097,
+     "src": "guardian",
+     "kind": "death",
+     "proc": "infotainment",
+     "pid": 1564694,
+     "a": 2,
+     "v0": 2469995443,
+     "v1": 0,
+     "text": "channel disconnect"
+    },
+    {
+     "t": "ev",
+     "ts": 1430158663522,
+     "src": "guardian",
+     "kind": "spawn",
+     "proc": "infotainment",
+     "pid": 1572882,
+     "a": 8,
+     "v0": 1430154743097,
+     "v1": 0,
+     "text": "infotainment"
+    },
+    {
+     "t": "ev",
+     "ts": 1430159007609,
+     "src": "guardian",
+     "kind": "exit_status",
+     "proc": "infotainment",
+     "pid": 1564694,
+     "a": 6,
+     "v0": 0,
+     "v1": 0,
+     "text": "SIGABRT"
+    },
+    {
+     "t": "ev",
+     "ts": 1430160658661,
+     "src": "guardian",
+     "kind": "ready",
+     "proc": "infotainment",
+     "pid": 1572882,
+     "a": 0,
+     "v0": 5910256,
+     "v1": 0,
+     "text": "infotainment"
+    },
+    {
+     "t": "ev",
+     "ts": 1430160662550,
+     "src": "guardian",
+     "kind": "restart",
+     "proc": "infotainment",
+     "pid": 1572882,
+     "a": 3,
+     "v0": 2476956748,
+     "v1": 6961305,
+     "text": "within budget"
+    }
+   ]
+  },
+  {
+   "id": "flood-1443513",
+   "fault": "flood",
+   "label": "Message flood",
+   "ok": true,
+   "t_fault_ns": 1443512943343,
+   "window_ms": 7000,
+   "brake": {
+    "baseline": {
+     "iterations": 6930,
+     "expected": 7000,
+     "deadline_misses": 160,
+     "skipped_releases": 70,
+     "stale_iterations": 3,
+     "safe_iterations": 9,
+     "latency_us": {
+      "n": 6930,
+      "mean": 180.4,
+      "p50": 142.8,
+      "p99": 876.8,
+      "p999": 3639.7,
+      "max": 13752.7
+     },
+     "exec_us": {
+      "n": 6930,
+      "mean": 168.9,
+      "p50": 157.2,
+      "p99": 376.5,
+      "p999": 1222.7,
+      "max": 3632.8
+     },
+     "sensor_io_us": {
+      "n": 6930,
+      "mean": 161,
+      "p50": 150,
+      "p99": 357.5,
+      "p999": 1208.4,
+      "max": 3625.5
+     },
+     "jitter_max_us": 13503.2
+    },
+    "fault": {
+     "iterations": 6952,
+     "expected": 7000,
+     "deadline_misses": 110,
+     "skipped_releases": 48,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 6952,
+      "mean": 161.7,
+      "p50": 132.9,
+      "p99": 602.1,
+      "p999": 3200.6,
+      "max": 5955
+     },
+     "exec_us": {
+      "n": 6952,
+      "mean": 155.3,
+      "p50": 140.1,
+      "p99": 365.5,
+      "p999": 1012.9,
+      "max": 7217.3
+     },
+     "sensor_io_us": {
+      "n": 6952,
+      "mean": 146.2,
+      "p50": 132.1,
+      "p99": 351.1,
+      "p999": 984,
+      "max": 7201.2
+     },
+     "jitter_max_us": 6356
+    }
+   },
+   "steer": {
+    "baseline": {
+     "iterations": 3491,
+     "expected": 3500,
+     "deadline_misses": 37,
+     "skipped_releases": 9,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 3491,
+      "mean": 302.2,
+      "p50": 261.7,
+      "p99": 1457.5,
+      "p999": 3414,
+      "max": 13003.8
+     },
+     "exec_us": {
+      "n": 3491,
+      "mean": 171.3,
+      "p50": 161.5,
+      "p99": 315.2,
+      "p999": 842.7,
+      "max": 3716.5
+     },
+     "sensor_io_us": {
+      "n": 3491,
+      "mean": 165.9,
+      "p50": 156.5,
+      "p99": 308.9,
+      "p999": 834.9,
+      "max": 3709.9
+     },
+     "jitter_max_us": 12683.8
+    },
+    "fault": {
+     "iterations": 3496,
+     "expected": 3500,
+     "deadline_misses": 19,
+     "skipped_releases": 4,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 3496,
+      "mean": 256.3,
+      "p50": 223.4,
+      "p99": 962.7,
+      "p999": 3432.9,
+      "max": 4401.1
+     },
+     "exec_us": {
+      "n": 3496,
+      "mean": 147.8,
+      "p50": 137.8,
+      "p99": 305.2,
+      "p999": 795.5,
+      "max": 7392.6
+     },
+     "sensor_io_us": {
+      "n": 3496,
+      "mean": 142.8,
+      "p50": 133.4,
+      "p99": 298.6,
+      "p999": 790.8,
+      "max": 7384.3
+     },
+     "jitter_max_us": 5480.9
+    }
+   },
+   "brake_off_cpu_iterations": 0,
+   "brake_noise": {
+    "windows": 1,
+    "max": 160,
+    "mean": 160
+   },
+   "steer_noise": {
+    "windows": 1,
+    "max": 37,
+    "mean": 37
+   },
+   "brake_miss_excess": false,
+   "steer_miss_excess": false,
+   "recovery": null,
+   "safety": {
+    "brake_safe_entries": 0,
+    "brake_link_lost_entries": 0,
+    "brake_stale_entries": 0,
+    "brake_first_detect_ms": null,
+    "brake_safe_duration_ms": null,
+    "brake_safe_reason": null,
+    "steer_safe_entries": 0
+   },
+   "cluster": {
+    "baseline_display_latency_max_us": 480,
+    "fault_display_latency_max_us": 486,
+    "media_messages": 97864
+   },
+   "infotainment": {
+    "peak_alloc_mb": 0,
+    "flood_messages": 99746,
+    "restarts": 0
+   },
+   "cpu_peak_pct": [
+    82,
+    80,
+    80.4
+   ],
+   "events": [
+    {
+     "t": "ev",
+     "ts": 1443512951661,
+     "src": "guardian",
+     "kind": "fault_inject",
+     "proc": "infotainment",
+     "pid": 1572882,
+     "a": 4,
+     "v0": 4000,
+     "v1": 0,
+     "text": "flood"
+    },
+    {
+     "t": "ev",
+     "ts": 1443512807258,
+     "src": "telemetry",
+     "kind": "stats_reset",
+     "proc": "telemetry",
+     "pid": 290842,
+     "a": 0,
+     "v0": 0,
+     "v1": 0,
+     "text": "window reset"
+    },
+    {
+     "t": "ev",
+     "ts": 1447516180098,
+     "src": "guardian",
+     "kind": "fault_end",
+     "proc": "infotainment",
+     "pid": 1572882,
+     "a": 4,
+     "v0": 4001525975,
+     "v1": 99746,
+     "text": "flood"
+    }
+   ]
+  },
+  {
+   "id": "kill_sensor-1455897",
+   "fault": "kill_sensor",
+   "label": "Kill sensor driver",
+   "ok": true,
+   "t_fault_ns": 1455897020422,
+   "window_ms": 3000,
+   "brake": {
+    "baseline": {
+     "iterations": 2983,
+     "expected": 3000,
+     "deadline_misses": 64,
+     "skipped_releases": 17,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 2983,
+      "mean": 177.1,
+      "p50": 143.5,
+      "p99": 846.7,
+      "p999": 2939.7,
+      "max": 4063.3
+     },
+     "exec_us": {
+      "n": 2983,
+      "mean": 170.4,
+      "p50": 157.9,
+      "p99": 396,
+      "p999": 1409.5,
+      "max": 3315.1
+     },
+     "sensor_io_us": {
+      "n": 2983,
+      "mean": 163,
+      "p50": 151.2,
+      "p99": 385.6,
+      "p999": 1400.8,
+      "max": 3308.2
+     },
+     "jitter_max_us": 3949.4
+    },
+    "fault": {
+     "iterations": 2982,
+     "expected": 3000,
+     "deadline_misses": 42,
+     "skipped_releases": 18,
+     "stale_iterations": 19,
+     "safe_iterations": 21,
+     "latency_us": {
+      "n": 2982,
+      "mean": 166.7,
+      "p50": 137.9,
+      "p99": 556.4,
+      "p999": 2876.9,
+      "max": 3056.1
+     },
+     "exec_us": {
+      "n": 2982,
+      "mean": 173.1,
+      "p50": 159,
+      "p99": 380,
+      "p999": 821.1,
+      "max": 3122.9
+     },
+     "sensor_io_us": {
+      "n": 2982,
+      "mean": 164.8,
+      "p50": 151.4,
+      "p99": 366,
+      "p999": 807.9,
+      "max": 3116.2
+     },
+     "jitter_max_us": 2929.9
+    }
+   },
+   "steer": {
+    "baseline": {
+     "iterations": 1500,
+     "expected": 1500,
+     "deadline_misses": 3,
+     "skipped_releases": 0,
+     "stale_iterations": 0,
+     "safe_iterations": 0,
+     "latency_us": {
+      "n": 1500,
+      "mean": 281.9,
+      "p50": 254.7,
+      "p99": 931.4,
+      "p999": 2717.7,
+      "max": 2741.2
+     },
+     "exec_us": {
+      "n": 1500,
+      "mean": 172.9,
+      "p50": 161.4,
+      "p99": 408.3,
+      "p999": 682.1,
+      "max": 1431.8
+     },
+     "sensor_io_us": {
+      "n": 1500,
+      "mean": 167.7,
+      "p50": 156.4,
+      "p99": 395.6,
+      "p999": 665.1,
+      "max": 1424.6
+     },
+     "jitter_max_us": 2471.1
+    },
+    "fault": {
+     "iterations": 1500,
+     "expected": 1500,
+     "deadline_misses": 6,
+     "skipped_releases": 0,
+     "stale_iterations": 6,
+     "safe_iterations": 8,
+     "latency_us": {
+      "n": 1500,
+      "mean": 287.6,
+      "p50": 261.7,
+      "p99": 1108.7,
+      "p999": 2410.8,
+      "max": 2659.9
+     },
+     "exec_us": {
+      "n": 1500,
+      "mean": 169.4,
+      "p50": 162.2,
+      "p99": 290.3,
+      "p999": 601,
+      "max": 1223.6
+     },
+     "sensor_io_us": {
+      "n": 1500,
+      "mean": 163.9,
+      "p50": 157.3,
+      "p99": 285,
+      "p999": 595.4,
+      "max": 1213.9
+     },
+     "jitter_max_us": 2430.9
+    }
+   },
+   "brake_off_cpu_iterations": 0,
+   "brake_noise": {
+    "windows": 5,
+    "max": 85,
+    "mean": 64.6
+   },
+   "steer_noise": {
+    "windows": 5,
+    "max": 14,
+    "mean": 8.6
+   },
+   "brake_miss_excess": false,
+   "steer_miss_excess": false,
+   "recovery": {
+    "process": "wheel_sensors",
+    "cause": "SIGKILL",
+    "detection_path": "channel disconnect",
+    "fault_to_detect_ms": 2.84,
+    "detect_to_ready_ms": 8.565,
+    "fault_to_ready_ms": 11.405,
+    "within_budget": true,
+    "new_pid": 1572886,
+    "old_pid": 1536002
+   },
+   "safety": {
+    "brake_safe_entries": 1,
+    "brake_link_lost_entries": 1,
+    "brake_stale_entries": 0,
+    "brake_first_detect_ms": 1.255,
+    "brake_safe_duration_ms": 21.012,
+    "brake_safe_reason": "read error (driver gone)",
+    "steer_safe_entries": 1
+   },
+   "cluster": {
+    "baseline_display_latency_max_us": 544,
+    "fault_display_latency_max_us": 181,
+    "media_messages": 6
+   },
+   "infotainment": {
+    "peak_alloc_mb": 0,
+    "flood_messages": 0,
+    "restarts": 0
+   },
+   "cpu_peak_pct": [
+    25.6,
+    29.2,
+    40.8
+   ],
+   "events": [
+    {
+     "t": "ev",
+     "ts": 1455897027390,
+     "src": "guardian",
+     "kind": "fault_inject",
+     "proc": "wheel_sensors",
+     "pid": 1536002,
+     "a": 5,
+     "v0": 0,
+     "v1": 0,
+     "text": "kill_sensor"
+    },
+    {
+     "t": "ev",
+     "ts": 1455899866431,
+     "src": "guardian",
+     "kind": "death",
+     "proc": "wheel_sensors",
+     "pid": 1536002,
+     "a": 2,
+     "v0": 2840362,
+     "v1": 0,
+     "text": "channel disconnect"
+    },
+    {
+     "t": "ev",
+     "ts": 1455904809876,
+     "src": "guardian",
+     "kind": "spawn",
+     "proc": "wheel_sensors",
+     "pid": 1572886,
+     "a": 58,
+     "v0": 1455900552482,
+     "v1": 0,
+     "text": "wheel_sensors"
+    },
+    {
+     "t": "ev",
+     "ts": 1455905507783,
+     "src": "guardian",
+     "kind": "exit_status",
+     "proc": "wheel_sensors",
+     "pid": 1536002,
+     "a": 9,
+     "v0": 0,
+     "v1": 0,
+     "text": "SIGKILL"
+    },
+    {
+     "t": "ev",
+     "ts": 1455908430950,
+     "src": "guardian",
+     "kind": "ready",
+     "proc": "wheel_sensors",
+     "pid": 1572886,
+     "a": 0,
+     "v0": 7872937,
+     "v1": 0,
+     "text": "wheel_sensors"
+    },
+    {
+     "t": "ev",
+     "ts": 1455908435416,
+     "src": "guardian",
+     "kind": "restart",
+     "proc": "wheel_sensors",
+     "pid": 1572886,
+     "a": 5,
+     "v0": 11404997,
+     "v1": 8564635,
+     "text": "within budget"
+    },
+    {
+     "t": "ev",
+     "ts": 1455898275219,
+     "src": "brake_ctl",
+     "kind": "safe_enter",
+     "proc": "brake_ctl",
+     "pid": 290840,
+     "a": 1,
+     "v0": 1887807,
+     "v1": 1450868,
+     "text": "SAFE_HOLD"
+    },
+    {
+     "t": "ev",
+     "ts": 1455918789844,
+     "src": "brake_ctl",
+     "kind": "safe_exit",
+     "proc": "brake_ctl",
+     "pid": 290840,
+     "a": 0,
+     "v0": 21011938,
+     "v1": 1450889,
+     "text": "normal control"
+    },
+    {
+     "t": "ev",
+     "ts": 1455898578469,
+     "src": "steer_ctl",
+     "kind": "safe_enter",
+     "proc": "steer_ctl",
+     "pid": 290841,
+     "a": 1,
+     "v0": 2203311,
+     "v1": 725419,
+     "text": "assist fading"
+    },
+    {
+     "t": "ev",
+     "ts": 1455914697450,
+     "src": "steer_ctl",
+     "kind": "safe_exit",
+     "proc": "steer_ctl",
+     "pid": 290841,
+     "a": 0,
+     "v0": 15987945,
+     "v1": 725427,
+     "text": "assist restored"
+    },
+    {
+     "t": "ev",
+     "ts": 1455896445278,
+     "src": "telemetry",
+     "kind": "stats_reset",
+     "proc": "telemetry",
+     "pid": 290842,
+     "a": 0,
+     "v0": 0,
+     "v1": 0,
+     "text": "window reset"
+    }
+   ]
+  }
+ ],
+ "traced": [
+  {
+   "fault": "crash",
+   "run": {
+    "id": "crash-1466625",
+    "fault": "crash",
+    "label": "Crash infotainment",
+    "ok": true,
+    "t_fault_ns": 1466625050186,
+    "window_ms": 1500,
+    "brake": {
+     "baseline": {
+      "iterations": 1495,
+      "expected": 1500,
+      "deadline_misses": 21,
+      "skipped_releases": 5,
+      "stale_iterations": 7,
+      "safe_iterations": 9,
+      "latency_us": {
+       "n": 1495,
+       "mean": 178.4,
+       "p50": 151.9,
+       "p99": 602.1,
+       "p999": 3450.8,
+       "max": 3593.9
+      },
+      "exec_us": {
+       "n": 1495,
+       "mean": 177.4,
+       "p50": 163.8,
+       "p99": 474.7,
+       "p999": 1008.4,
+       "max": 1391.3
+      },
+      "sensor_io_us": {
+       "n": 1495,
+       "mean": 170.3,
+       "p50": 156.7,
+       "p99": 466.2,
+       "p999": 1000.8,
+       "max": 1383.1
+      },
+      "jitter_max_us": 3465.5
+     },
+     "fault": {
+      "iterations": 1476,
+      "expected": 1500,
+      "deadline_misses": 53,
+      "skipped_releases": 24,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 1476,
+       "mean": 214.6,
+       "p50": 168.7,
+       "p99": 1030.6,
+       "p999": 4673.1,
+       "max": 5645.4
+      },
+      "exec_us": {
+       "n": 1476,
+       "mean": 190.8,
+       "p50": 169.7,
+       "p99": 456.4,
+       "p999": 1908.5,
+       "max": 2929.4
+      },
+      "sensor_io_us": {
+       "n": 1476,
+       "mean": 183.6,
+       "p50": 162.8,
+       "p99": 450.1,
+       "p999": 1900.9,
+       "max": 2922.6
+      },
+      "jitter_max_us": 5559.9
+     }
+    },
+    "steer": {
+     "baseline": {
+      "iterations": 750,
+      "expected": 750,
+      "deadline_misses": 4,
+      "skipped_releases": 0,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 750,
+       "mean": 282.1,
+       "p50": 252.8,
+       "p99": 762,
+       "p999": 2851.7,
+       "max": 2851.7
+      },
+      "exec_us": {
+       "n": 750,
+       "mean": 170.1,
+       "p50": 165.4,
+       "p99": 292.8,
+       "p999": 621.8,
+       "max": 621.8
+      },
+      "sensor_io_us": {
+       "n": 750,
+       "mean": 165.2,
+       "p50": 160.7,
+       "p99": 287.8,
+       "p999": 616.3,
+       "max": 616.3
+      },
+      "jitter_max_us": 2667.7
+     },
+     "fault": {
+      "iterations": 746,
+      "expected": 750,
+      "deadline_misses": 9,
+      "skipped_releases": 4,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 746,
+       "mean": 337.6,
+       "p50": 303,
+       "p99": 1265.2,
+       "p999": 5140.6,
+       "max": 5140.6
+      },
+      "exec_us": {
+       "n": 746,
+       "mean": 200.1,
+       "p50": 181.6,
+       "p99": 380.7,
+       "p999": 6088.8,
+       "max": 6088.8
+      },
+      "sensor_io_us": {
+       "n": 746,
+       "mean": 194.4,
+       "p50": 175.9,
+       "p99": 370.6,
+       "p999": 6081.3,
+       "max": 6081.3
+      },
+      "jitter_max_us": 4861.4
+     }
+    },
+    "brake_off_cpu_iterations": 0,
+    "brake_noise": {
+     "windows": 9,
+     "max": 52,
+     "mean": 29.9
+    },
+    "steer_noise": {
+     "windows": 9,
+     "max": 8,
+     "mean": 4.7
+    },
+    "brake_miss_excess": false,
+    "steer_miss_excess": false,
+    "recovery": {
+     "process": "infotainment",
+     "cause": "SIGSEGV",
+     "detection_path": "channel disconnect",
+     "fault_to_detect_ms": 4.196,
+     "detect_to_ready_ms": 75.783,
+     "fault_to_ready_ms": 79.978,
+     "within_budget": false,
+     "new_pid": 1642524,
+     "old_pid": 1572882
+    },
+    "safety": {
+     "brake_safe_entries": 0,
+     "brake_link_lost_entries": 0,
+     "brake_stale_entries": 0,
+     "brake_first_detect_ms": null,
+     "brake_safe_duration_ms": null,
+     "brake_safe_reason": null,
+     "steer_safe_entries": 0
+    },
+    "cluster": {
+     "baseline_display_latency_max_us": 489,
+     "fault_display_latency_max_us": 153,
+     "media_messages": 3
+    },
+    "infotainment": {
+     "peak_alloc_mb": 0,
+     "flood_messages": 0,
+     "restarts": 1
+    },
+    "cpu_peak_pct": [
+     40.7,
+     40.7,
+     47.4
+    ],
+    "events": [
+     {
+      "t": "ev",
+      "ts": 1466625056482,
+      "src": "guardian",
+      "kind": "fault_inject",
+      "proc": "infotainment",
+      "pid": 1572882,
+      "a": 1,
+      "v0": 3000,
+      "v1": 0,
+      "text": "crash"
+     },
+     {
+      "t": "ev",
+      "ts": 1466629249873,
+      "src": "guardian",
+      "kind": "death",
+      "proc": "infotainment",
+      "pid": 1572882,
+      "a": 2,
+      "v0": 4195581,
+      "v1": 0,
+      "text": "channel disconnect"
+     },
+     {
+      "t": "ev",
+      "ts": 1466633999080,
+      "src": "guardian",
+      "kind": "spawn",
+      "proc": "infotainment",
+      "pid": 1642524,
+      "a": 8,
+      "v0": 1466629861420,
+      "v1": 0,
+      "text": "infotainment"
+     },
+     {
+      "t": "ev",
+      "ts": 1466634712541,
+      "src": "guardian",
+      "kind": "exit_status",
+      "proc": "infotainment",
+      "pid": 1572882,
+      "a": 11,
+      "v0": 0,
+      "v1": 0,
+      "text": "SIGSEGV"
+     },
+     {
+      "t": "ev",
+      "ts": 1466624933594,
+      "src": "telemetry",
+      "kind": "stats_reset",
+      "proc": "telemetry",
+      "pid": 290842,
+      "a": 0,
+      "v0": 0,
+      "v1": 0,
+      "text": "window reset"
+     },
+     {
+      "t": "ev",
+      "ts": 1466705037084,
+      "src": "guardian",
+      "kind": "ready",
+      "proc": "infotainment",
+      "pid": 1642524,
+      "a": 0,
+      "v0": 75167234,
+      "v1": 0,
+      "text": "infotainment"
+     },
+     {
+      "t": "ev",
+      "ts": 1466705119267,
+      "src": "guardian",
+      "kind": "restart",
+      "proc": "infotainment",
+      "pid": 1642524,
+      "a": 1,
+      "v0": 79978468,
+      "v1": 75782887,
+      "text": "over budget"
+     }
+    ]
+   },
+   "trace": {
+    "duration_ms": 2996.8,
+    "events": 194460,
+    "cps": 2097725513,
+    "fault_at_ms": 1117.988,
+    "brake_wakeups": 6675,
+    "brake_ready_to_running_us": {
+     "n": 6675,
+     "mean": 20.9,
+     "p50": 16.57,
+     "p99": 75.2,
+     "p999": 206.34,
+     "max": 497.54
+    },
+    "brake_ready_to_running_before_fault_us": {
+     "n": 2528,
+     "mean": 20.18,
+     "p50": 16.2,
+     "p99": 79.9,
+     "p999": 205.61,
+     "max": 263.95
+    },
+    "brake_ready_to_running_after_fault_us": {
+     "n": 4147,
+     "mean": 21.35,
+     "p50": 16.83,
+     "p99": 73.21,
+     "p999": 206.34,
+     "max": 497.54
+    },
+    "platform_stalls": 16,
+    "platform_stall_max_us": 340.4,
+    "busy_waits_over_100us": 22,
+    "fault_threads_on_brake_cpu_ms": 4,
+    "ipis_on_brake_cpu": 857,
+    "markers": [
+     {
+      "t_ms": 668.807,
+      "cpu": 2,
+      "text": "CZ brake SAFE_ENTER reason=3"
+     },
+     {
+      "t_ms": 677.867,
+      "cpu": 2,
+      "text": "CZ brake SAFE_EXIT after 9093725 ns"
+     },
+     {
+      "t_ms": 1117.988,
+      "cpu": 2,
+      "text": "CZ fault inject: crash"
+     },
+     {
+      "t_ms": 1122.221,
+      "cpu": 0,
+      "text": "CZ guardian: infotainment pid 1572882 died (channel disconnect)"
+     },
+     {
+      "t_ms": 1198.209,
+      "cpu": 1,
+      "text": "CZ guardian: infotainment ready again, restart 75782887 ns"
+     }
+    ]
+   }
+  },
+  {
+   "fault": "storm",
+   "run": {
+    "id": "storm-1480705",
+    "fault": "storm",
+    "label": "CPU storm",
+    "ok": true,
+    "t_fault_ns": 1480704943093,
+    "window_ms": 3000,
+    "brake": {
+     "baseline": {
+      "iterations": 2989,
+      "expected": 3000,
+      "deadline_misses": 61,
+      "skipped_releases": 11,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 2989,
+       "mean": 183,
+       "p50": 145.2,
+       "p99": 960.4,
+       "p999": 3058.5,
+       "max": 3576
+      },
+      "exec_us": {
+       "n": 2989,
+       "mean": 176,
+       "p50": 163,
+       "p99": 438.5,
+       "p999": 945.2,
+       "max": 1348
+      },
+      "sensor_io_us": {
+       "n": 2989,
+       "mean": 168.8,
+       "p50": 155.4,
+       "p99": 428.5,
+       "p999": 938.2,
+       "max": 1340.4
+      },
+      "jitter_max_us": 3376.6
+     },
+     "fault": {
+      "iterations": 2952,
+      "expected": 3000,
+      "deadline_misses": 75,
+      "skipped_releases": 48,
+      "stale_iterations": 38,
+      "safe_iterations": 44,
+      "latency_us": {
+       "n": 2952,
+       "mean": 142.7,
+       "p50": 111.7,
+       "p99": 687.3,
+       "p999": 2785.1,
+       "max": 8685.2
+      },
+      "exec_us": {
+       "n": 2952,
+       "mean": 149.7,
+       "p50": 121.4,
+       "p99": 372.7,
+       "p999": 3075.8,
+       "max": 15174.1
+      },
+      "sensor_io_us": {
+       "n": 2952,
+       "mean": 144.4,
+       "p50": 116.3,
+       "p99": 363.2,
+       "p999": 3066,
+       "max": 15162.3
+      },
+      "jitter_max_us": 14590.7
+     }
+    },
+    "steer": {
+     "baseline": {
+      "iterations": 1500,
+      "expected": 1500,
+      "deadline_misses": 6,
+      "skipped_releases": 0,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 1500,
+       "mean": 294.5,
+       "p50": 250.7,
+       "p99": 1151.8,
+       "p999": 2027.4,
+       "max": 3830.4
+      },
+      "exec_us": {
+       "n": 1500,
+       "mean": 180.1,
+       "p50": 166.6,
+       "p99": 329.2,
+       "p999": 1864.8,
+       "max": 3240.3
+      },
+      "sensor_io_us": {
+       "n": 1500,
+       "mean": 174.6,
+       "p50": 161.4,
+       "p99": 320.1,
+       "p999": 1858.2,
+       "max": 3234.6
+      },
+      "jitter_max_us": 3658.7
+     },
+     "fault": {
+      "iterations": 1490,
+      "expected": 1500,
+      "deadline_misses": 19,
+      "skipped_releases": 10,
+      "stale_iterations": 6,
+      "safe_iterations": 10,
+      "latency_us": {
+       "n": 1490,
+       "mean": 220,
+       "p50": 168.8,
+       "p99": 979.2,
+       "p999": 5057.4,
+       "max": 19820.9
+      },
+      "exec_us": {
+       "n": 1490,
+       "mean": 143.4,
+       "p50": 131.5,
+       "p99": 298.6,
+       "p999": 2690.8,
+       "max": 2846.4
+      },
+      "sensor_io_us": {
+       "n": 1490,
+       "mean": 139.2,
+       "p50": 127.4,
+       "p99": 293.1,
+       "p999": 2684.1,
+       "max": 2840.2
+      },
+      "jitter_max_us": 19680.8
+     }
+    },
+    "brake_off_cpu_iterations": 0,
+    "brake_noise": {
+     "windows": 5,
+     "max": 75,
+     "mean": 60
+    },
+    "steer_noise": {
+     "windows": 5,
+     "max": 12,
+     "mean": 8
+    },
+    "brake_miss_excess": false,
+    "steer_miss_excess": true,
+    "recovery": null,
+    "safety": {
+     "brake_safe_entries": 3,
+     "brake_link_lost_entries": 0,
+     "brake_stale_entries": 3,
+     "brake_first_detect_ms": 1147.211,
+     "brake_safe_duration_ms": 35.763,
+     "brake_safe_reason": "stale sample",
+     "steer_safe_entries": 2
+    },
+    "cluster": {
+     "baseline_display_latency_max_us": 357,
+     "fault_display_latency_max_us": 123,
+     "media_messages": 0
+    },
+    "infotainment": {
+     "peak_alloc_mb": 0,
+     "flood_messages": 0,
+     "restarts": 0
+    },
+    "cpu_peak_pct": [
+     100,
+     100,
+     100
+    ],
+    "events": [
+     {
+      "t": "ev",
+      "ts": 1480704954142,
+      "src": "guardian",
+      "kind": "fault_inject",
+      "proc": "infotainment",
+      "pid": 1642524,
+      "a": 2,
+      "v0": 3000,
+      "v1": 0,
+      "text": "storm"
+     },
+     {
+      "t": "ev",
+      "ts": 1480702904078,
+      "src": "telemetry",
+      "kind": "stats_reset",
+      "proc": "telemetry",
+      "pid": 290842,
+      "a": 0,
+      "v0": 0,
+      "v1": 0,
+      "text": "window reset"
+     },
+     {
+      "t": "ev",
+      "ts": 1481852154532,
+      "src": "brake_ctl",
+      "kind": "safe_enter",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 3,
+      "v0": 19698545,
+      "v1": 1476806,
+      "text": "SAFE_HOLD"
+     },
+     {
+      "t": "ev",
+      "ts": 1481872634801,
+      "src": "brake_ctl",
+      "kind": "safe_exit",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 0,
+      "v0": 35762776,
+      "v1": 1476842,
+      "text": "normal control"
+     },
+     {
+      "t": "ev",
+      "ts": 1482448710233,
+      "src": "brake_ctl",
+      "kind": "safe_enter",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 3,
+      "v0": 10958727,
+      "v1": 1477419,
+      "text": "SAFE_HOLD"
+     },
+     {
+      "t": "ev",
+      "ts": 1482471688794,
+      "src": "brake_ctl",
+      "kind": "safe_exit",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 0,
+      "v0": 22992752,
+      "v1": 1477442,
+      "text": "normal control"
+     },
+     {
+      "t": "ev",
+      "ts": 1482458910588,
+      "src": "steer_ctl",
+      "kind": "safe_enter",
+      "proc": "steer_ctl",
+      "pid": 290841,
+      "a": 3,
+      "v0": 21139539,
+      "v1": 738699,
+      "text": "assist fading"
+     },
+     {
+      "t": "ev",
+      "ts": 1482472731316,
+      "src": "steer_ctl",
+      "kind": "safe_exit",
+      "proc": "steer_ctl",
+      "pid": 290841,
+      "a": 0,
+      "v0": 13920482,
+      "v1": 738706,
+      "text": "assist restored"
+     },
+     {
+      "t": "ev",
+      "ts": 1483447880548,
+      "src": "brake_ctl",
+      "kind": "safe_enter",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 3,
+      "v0": 10641579,
+      "v1": 1478418,
+      "text": "SAFE_HOLD"
+     },
+     {
+      "t": "ev",
+      "ts": 1483470710208,
+      "src": "brake_ctl",
+      "kind": "safe_exit",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 0,
+      "v0": 22836532,
+      "v1": 1478441,
+      "text": "normal control"
+     },
+     {
+      "t": "ev",
+      "ts": 1483468275800,
+      "src": "steer_ctl",
+      "kind": "safe_enter",
+      "proc": "steer_ctl",
+      "pid": 290841,
+      "a": 3,
+      "v0": 31006691,
+      "v1": 739194,
+      "text": "assist fading"
+     },
+     {
+      "t": "ev",
+      "ts": 1483472667622,
+      "src": "steer_ctl",
+      "kind": "safe_exit",
+      "proc": "steer_ctl",
+      "pid": 290841,
+      "a": 0,
+      "v0": 4397867,
+      "v1": 739206,
+      "text": "assist restored"
+     }
+    ]
+   },
+   "trace": {
+    "duration_ms": 4994.9,
+    "events": 303522,
+    "cps": 2097725513,
+    "fault_at_ms": 1002.206,
+    "brake_wakeups": 11143,
+    "brake_ready_to_running_us": {
+     "n": 11143,
+     "mean": 17.98,
+     "p50": 13.06,
+     "p99": 67.55,
+     "p999": 200.53,
+     "max": 4882.42
+    },
+    "brake_ready_to_running_before_fault_us": {
+     "n": 2261,
+     "mean": 21.78,
+     "p50": 17.14,
+     "p99": 82.26,
+     "p999": 188.92,
+     "max": 1751.65
+    },
+    "brake_ready_to_running_after_fault_us": {
+     "n": 8882,
+     "mean": 17.02,
+     "p50": 11.69,
+     "p99": 63.02,
+     "p999": 201.87,
+     "max": 4882.42
+    },
+    "platform_stalls": 24,
+    "platform_stall_max_us": 4882.4,
+    "busy_waits_over_100us": 27,
+    "fault_threads_on_brake_cpu_ms": 1949.15,
+    "ipis_on_brake_cpu": 587,
+    "markers": [
+     {
+      "t_ms": 1002.206,
+      "cpu": 0,
+      "text": "CZ fault inject: storm"
+     },
+     {
+      "t_ms": 2149.403,
+      "cpu": 2,
+      "text": "CZ brake SAFE_ENTER reason=3"
+     },
+     {
+      "t_ms": 2169.877,
+      "cpu": 2,
+      "text": "CZ brake SAFE_EXIT after 35762776 ns"
+     },
+     {
+      "t_ms": 2745.94,
+      "cpu": 2,
+      "text": "CZ brake SAFE_ENTER reason=3"
+     },
+     {
+      "t_ms": 2756.161,
+      "cpu": 1,
+      "text": "CZ steer SAFE_ENTER reason=3"
+     },
+     {
+      "t_ms": 2768.916,
+      "cpu": 2,
+      "text": "CZ brake SAFE_EXIT after 22992752 ns"
+     },
+     {
+      "t_ms": 3745.108,
+      "cpu": 2,
+      "text": "CZ brake SAFE_ENTER reason=3"
+     },
+     {
+      "t_ms": 3765.499,
+      "cpu": 1,
+      "text": "CZ steer SAFE_ENTER reason=3"
+     },
+     {
+      "t_ms": 3767.926,
+      "cpu": 2,
+      "text": "CZ brake SAFE_EXIT after 22836532 ns"
+     },
+     {
+      "t_ms": 4009.865,
+      "cpu": 0,
+      "text": "CZ fault end: storm"
+     }
+    ]
+   }
+  },
+  {
+   "fault": "leak",
+   "run": {
+    "id": "leak-1498059",
+    "fault": "leak",
+    "label": "Memory leak",
+    "ok": true,
+    "t_fault_ns": 1498058880471,
+    "window_ms": 5750,
+    "brake": {
+     "baseline": {
+      "iterations": 5697,
+      "expected": 5750,
+      "deadline_misses": 144,
+      "skipped_releases": 53,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 5697,
+       "mean": 181.5,
+       "p50": 146,
+       "p99": 894.1,
+       "p999": 2978.5,
+       "max": 6854.9
+      },
+      "exec_us": {
+       "n": 5697,
+       "mean": 181.1,
+       "p50": 164.2,
+       "p99": 436.4,
+       "p999": 1713.8,
+       "max": 4102.6
+      },
+      "sensor_io_us": {
+       "n": 5697,
+       "mean": 173.2,
+       "p50": 156.9,
+       "p99": 417.3,
+       "p999": 1629.2,
+       "max": 4095.9
+      },
+      "jitter_max_us": 6772
+     },
+     "fault": {
+      "iterations": 5633,
+      "expected": 5750,
+      "deadline_misses": 225,
+      "skipped_releases": 117,
+      "stale_iterations": 4,
+      "safe_iterations": 8,
+      "latency_us": {
+       "n": 5633,
+       "mean": 217.9,
+       "p50": 166.1,
+       "p99": 1110.6,
+       "p999": 3571.3,
+       "max": 46384.5
+      },
+      "exec_us": {
+       "n": 5633,
+       "mean": 187.9,
+       "p50": 170.1,
+       "p99": 441.6,
+       "p999": 1970.1,
+       "max": 4579.3
+      },
+      "sensor_io_us": {
+       "n": 5633,
+       "mean": 180.5,
+       "p50": 163.2,
+       "p99": 433.1,
+       "p999": 1961.9,
+       "max": 4572
+      },
+      "jitter_max_us": 46177.8
+     }
+    },
+    "steer": {
+     "baseline": {
+      "iterations": 2874,
+      "expected": 2875,
+      "deadline_misses": 17,
+      "skipped_releases": 1,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 2874,
+       "mean": 280.2,
+       "p50": 242.8,
+       "p99": 1173.2,
+       "p999": 3135.8,
+       "max": 3896.6
+      },
+      "exec_us": {
+       "n": 2874,
+       "mean": 169.8,
+       "p50": 160.4,
+       "p99": 331.8,
+       "p999": 1196.8,
+       "max": 2039.1
+      },
+      "sensor_io_us": {
+       "n": 2874,
+       "mean": 164.5,
+       "p50": 155.2,
+       "p99": 323.9,
+       "p999": 1189.3,
+       "max": 2033.8
+      },
+      "jitter_max_us": 3616
+     },
+     "fault": {
+      "iterations": 2867,
+      "expected": 2875,
+      "deadline_misses": 34,
+      "skipped_releases": 8,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 2867,
+       "mean": 326.5,
+       "p50": 279.6,
+       "p99": 1552.6,
+       "p999": 4620.3,
+       "max": 11201.6
+      },
+      "exec_us": {
+       "n": 2867,
+       "mean": 194,
+       "p50": 177.1,
+       "p99": 473.3,
+       "p999": 2051.3,
+       "max": 5059.3
+      },
+      "sensor_io_us": {
+       "n": 2867,
+       "mean": 187.9,
+       "p50": 171.9,
+       "p99": 449.3,
+       "p999": 2046.2,
+       "max": 5050.2
+      },
+      "jitter_max_us": 11035.4
+     }
+    },
+    "brake_off_cpu_iterations": 0,
+    "brake_noise": {
+     "windows": 1,
+     "max": 144,
+     "mean": 144
+    },
+    "steer_noise": {
+     "windows": 1,
+     "max": 17,
+     "mean": 17
+    },
+    "brake_miss_excess": true,
+    "steer_miss_excess": true,
+    "recovery": {
+     "process": "infotainment",
+     "cause": "SIGABRT",
+     "detection_path": "channel disconnect",
+     "fault_to_detect_ms": null,
+     "detect_to_ready_ms": 10.162,
+     "fault_to_ready_ms": null,
+     "within_budget": true,
+     "new_pid": 1884187,
+     "old_pid": 1642524
+    },
+    "safety": {
+     "brake_safe_entries": 2,
+     "brake_link_lost_entries": 0,
+     "brake_stale_entries": 2,
+     "brake_first_detect_ms": 2861.471,
+     "brake_safe_duration_ms": 5.966,
+     "brake_safe_reason": "stale sample",
+     "steer_safe_entries": 0
+    },
+    "cluster": {
+     "baseline_display_latency_max_us": 349,
+     "fault_display_latency_max_us": 247,
+     "media_messages": 7
+    },
+    "infotainment": {
+     "peak_alloc_mb": 188,
+     "flood_messages": 0,
+     "restarts": 1
+    },
+    "cpu_peak_pct": [
+     44.5,
+     50.3,
+     55
+    ],
+    "events": [
+     {
+      "t": "ev",
+      "ts": 1498058888346,
+      "src": "guardian",
+      "kind": "fault_inject",
+      "proc": "infotainment",
+      "pid": 1642524,
+      "a": 3,
+      "v0": 3000,
+      "v1": 0,
+      "text": "leak"
+     },
+     {
+      "t": "ev",
+      "ts": 1498057923143,
+      "src": "telemetry",
+      "kind": "stats_reset",
+      "proc": "telemetry",
+      "pid": 290842,
+      "a": 0,
+      "v0": 0,
+      "v1": 0,
+      "text": "window reset"
+     },
+     {
+      "t": "ev",
+      "ts": 1500573020496,
+      "src": "guardian",
+      "kind": "death",
+      "proc": "infotainment",
+      "pid": 1642524,
+      "a": 2,
+      "v0": 2514133111,
+      "v1": 0,
+      "text": "channel disconnect"
+     },
+     {
+      "t": "ev",
+      "ts": 1500579659733,
+      "src": "guardian",
+      "kind": "spawn",
+      "proc": "infotainment",
+      "pid": 1884187,
+      "a": 8,
+      "v0": 1500573902823,
+      "v1": 0,
+      "text": "infotainment"
+     },
+     {
+      "t": "ev",
+      "ts": 1500580014396,
+      "src": "guardian",
+      "kind": "exit_status",
+      "proc": "infotainment",
+      "pid": 1642524,
+      "a": 6,
+      "v0": 0,
+      "v1": 0,
+      "text": "SIGABRT"
+     },
+     {
+      "t": "ev",
+      "ts": 1500583183196,
+      "src": "guardian",
+      "kind": "ready",
+      "proc": "infotainment",
+      "pid": 1884187,
+      "a": 0,
+      "v0": 9273176,
+      "v1": 0,
+      "text": "infotainment"
+     },
+     {
+      "t": "ev",
+      "ts": 1500583188334,
+      "src": "guardian",
+      "kind": "restart",
+      "proc": "infotainment",
+      "pid": 1884187,
+      "a": 3,
+      "v0": 2524295528,
+      "v1": 10162417,
+      "text": "within budget"
+     },
+     {
+      "t": "ev",
+      "ts": 1500920351727,
+      "src": "brake_ctl",
+      "kind": "safe_enter",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 3,
+      "v0": 13035534,
+      "v1": 1495879,
+      "text": "SAFE_HOLD"
+     },
+     {
+      "t": "ev",
+      "ts": 1500925869904,
+      "src": "brake_ctl",
+      "kind": "safe_exit",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 0,
+      "v0": 5965794,
+      "v1": 1495896,
+      "text": "normal control"
+     },
+     {
+      "t": "ev",
+      "ts": 1503373777047,
+      "src": "brake_ctl",
+      "kind": "safe_enter",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 3,
+      "v0": 13497423,
+      "v1": 1498332,
+      "text": "SAFE_HOLD"
+     },
+     {
+      "t": "ev",
+      "ts": 1503376780545,
+      "src": "brake_ctl",
+      "kind": "safe_exit",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 0,
+      "v0": 3094934,
+      "v1": 1498347,
+      "text": "normal control"
+     }
+    ]
+   },
+   "trace": {
+    "duration_ms": 5998,
+    "events": 378676,
+    "cps": 2097725513,
+    "fault_at_ms": 1046.969,
+    "brake_wakeups": 13435,
+    "brake_ready_to_running_us": {
+     "n": 13435,
+     "mean": 22.63,
+     "p50": 16.98,
+     "p99": 91.26,
+     "p999": 291.93,
+     "max": 2787.95
+    },
+    "brake_ready_to_running_before_fault_us": {
+     "n": 2353,
+     "mean": 23.83,
+     "p50": 17.22,
+     "p99": 129.64,
+     "p999": 389.23,
+     "max": 574.27
+    },
+    "brake_ready_to_running_after_fault_us": {
+     "n": 11082,
+     "mean": 22.38,
+     "p50": 16.93,
+     "p99": 85.28,
+     "p999": 275.54,
+     "max": 2787.95
+    },
+    "platform_stalls": 44,
+    "platform_stall_max_us": 2788,
+    "busy_waits_over_100us": 66,
+    "fault_threads_on_brake_cpu_ms": 17.45,
+    "ipis_on_brake_cpu": 1874,
+    "markers": [
+     {
+      "t_ms": 1046.969,
+      "cpu": 0,
+      "text": "CZ fault inject: leak"
+     },
+     {
+      "t_ms": 3561.288,
+      "cpu": 1,
+      "text": "CZ guardian: infotainment pid 1642524 died (channel disconnect)"
+     },
+     {
+      "t_ms": 3571.269,
+      "cpu": 2,
+      "text": "CZ guardian: infotainment ready again, restart 10162417 ns"
+     },
+     {
+      "t_ms": 3908.426,
+      "cpu": 2,
+      "text": "CZ brake SAFE_ENTER reason=3"
+     },
+     {
+      "t_ms": 3913.935,
+      "cpu": 2,
+      "text": "CZ brake SAFE_EXIT after 5965794 ns"
+     }
+    ]
+   }
+  },
+  {
+   "fault": "flood",
+   "run": {
+    "id": "flood-1520611",
+    "fault": "flood",
+    "label": "Message flood",
+    "ok": true,
+    "t_fault_ns": 1520610693018,
+    "window_ms": 3000,
+    "brake": {
+     "baseline": {
+      "iterations": 2828,
+      "expected": 3000,
+      "deadline_misses": 229,
+      "skipped_releases": 172,
+      "stale_iterations": 6,
+      "safe_iterations": 12,
+      "latency_us": {
+       "n": 2828,
+       "mean": 260.6,
+       "p50": 163.3,
+       "p99": 1245.7,
+       "p999": 40504.9,
+       "max": 51755.6
+      },
+      "exec_us": {
+       "n": 2828,
+       "mean": 193.7,
+       "p50": 176.9,
+       "p99": 431.5,
+       "p999": 883.2,
+       "max": 3996.7
+      },
+      "sensor_io_us": {
+       "n": 2828,
+       "mean": 184.7,
+       "p50": 168.6,
+       "p99": 420.1,
+       "p999": 875,
+       "max": 3988.7
+      },
+      "jitter_max_us": 51181.3
+     },
+     "fault": {
+      "iterations": 2960,
+      "expected": 3000,
+      "deadline_misses": 104,
+      "skipped_releases": 40,
+      "stale_iterations": 4,
+      "safe_iterations": 8,
+      "latency_us": {
+       "n": 2960,
+       "mean": 207.1,
+       "p50": 154.4,
+       "p99": 1073.4,
+       "p999": 5666.5,
+       "max": 13741.7
+      },
+      "exec_us": {
+       "n": 2960,
+       "mean": 179.8,
+       "p50": 153.8,
+       "p99": 501.6,
+       "p999": 1058,
+       "max": 1231.8
+      },
+      "sensor_io_us": {
+       "n": 2960,
+       "mean": 167.9,
+       "p50": 142.5,
+       "p99": 481.2,
+       "p999": 995.4,
+       "max": 1211.2
+      },
+      "jitter_max_us": 13546.9
+     }
+    },
+    "steer": {
+     "baseline": {
+      "iterations": 1449,
+      "expected": 1500,
+      "deadline_misses": 75,
+      "skipped_releases": 51,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 1449,
+       "mean": 407.6,
+       "p50": 269.5,
+       "p99": 2478.9,
+       "p999": 38781.4,
+       "max": 50006.5
+      },
+      "exec_us": {
+       "n": 1449,
+       "mean": 186.2,
+       "p50": 180.5,
+       "p99": 347,
+       "p999": 1106.6,
+       "max": 2336.8
+      },
+      "sensor_io_us": {
+       "n": 1449,
+       "mean": 180.2,
+       "p50": 174.7,
+       "p99": 331.9,
+       "p999": 1099.7,
+       "max": 2330.4
+      },
+      "jitter_max_us": 49259.8
+     },
+     "fault": {
+      "iterations": 1475,
+      "expected": 1500,
+      "deadline_misses": 34,
+      "skipped_releases": 25,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 1475,
+       "mean": 325,
+       "p50": 249.1,
+       "p99": 1455.2,
+       "p999": 12940.9,
+       "max": 41437.9
+      },
+      "exec_us": {
+       "n": 1475,
+       "mean": 162.2,
+       "p50": 153.2,
+       "p99": 333.8,
+       "p999": 553.4,
+       "max": 2222.8
+      },
+      "sensor_io_us": {
+       "n": 1475,
+       "mean": 156.7,
+       "p50": 148.2,
+       "p99": 310.4,
+       "p999": 410.7,
+       "max": 2208.5
+      },
+      "jitter_max_us": 41165.7
+     }
+    },
+    "brake_off_cpu_iterations": 0,
+    "brake_noise": {
+     "windows": 7,
+     "max": 229,
+     "mean": 96
+    },
+    "steer_noise": {
+     "windows": 7,
+     "max": 75,
+     "mean": 20.3
+    },
+    "brake_miss_excess": false,
+    "steer_miss_excess": false,
+    "recovery": null,
+    "safety": {
+     "brake_safe_entries": 2,
+     "brake_link_lost_entries": 0,
+     "brake_stale_entries": 2,
+     "brake_first_detect_ms": 790.995,
+     "brake_safe_duration_ms": 2.293,
+     "brake_safe_reason": "stale sample",
+     "steer_safe_entries": 0
+    },
+    "cluster": {
+     "baseline_display_latency_max_us": 442,
+     "fault_display_latency_max_us": 428,
+     "media_messages": 41053
+    },
+    "infotainment": {
+     "peak_alloc_mb": 0,
+     "flood_messages": 41658,
+     "restarts": 0
+    },
+    "cpu_peak_pct": [
+     86.1,
+     86.1,
+     83.6
+    ],
+    "events": [
+     {
+      "t": "ev",
+      "ts": 1520610700268,
+      "src": "guardian",
+      "kind": "fault_inject",
+      "proc": "infotainment",
+      "pid": 1884187,
+      "a": 4,
+      "v0": 3000,
+      "v1": 0,
+      "text": "flood"
+     },
+     {
+      "t": "ev",
+      "ts": 1520610302444,
+      "src": "telemetry",
+      "kind": "stats_reset",
+      "proc": "telemetry",
+      "pid": 290842,
+      "a": 0,
+      "v0": 0,
+      "v1": 0,
+      "text": "window reset"
+     },
+     {
+      "t": "ev",
+      "ts": 1521401688045,
+      "src": "brake_ctl",
+      "kind": "safe_enter",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 3,
+      "v0": 13248869,
+      "v1": 1516360,
+      "text": "SAFE_HOLD"
+     },
+     {
+      "t": "ev",
+      "ts": 1521403968463,
+      "src": "brake_ctl",
+      "kind": "safe_exit",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 0,
+      "v0": 2292743,
+      "v1": 1516374,
+      "text": "normal control"
+     },
+     {
+      "t": "ev",
+      "ts": 1522179538902,
+      "src": "brake_ctl",
+      "kind": "safe_enter",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 3,
+      "v0": 15114300,
+      "v1": 1517136,
+      "text": "SAFE_HOLD"
+     },
+     {
+      "t": "ev",
+      "ts": 1522182844832,
+      "src": "brake_ctl",
+      "kind": "safe_exit",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 0,
+      "v0": 3462417,
+      "v1": 1517153,
+      "text": "normal control"
+     }
+    ]
+   },
+   "trace": {
+    "duration_ms": 4997.9,
+    "events": 862391,
+    "cps": 2097725513,
+    "fault_at_ms": 984.669,
+    "brake_wakeups": 11426,
+    "brake_ready_to_running_us": {
+     "n": 11426,
+     "mean": 21.47,
+     "p50": 16.13,
+     "p99": 86.99,
+     "p999": 226.82,
+     "max": 1966.2
+    },
+    "brake_ready_to_running_before_fault_us": {
+     "n": 2172,
+     "mean": 25.55,
+     "p50": 21.8,
+     "p99": 86.97,
+     "p999": 179.23,
+     "max": 304.11
+    },
+    "brake_ready_to_running_after_fault_us": {
+     "n": 9254,
+     "mean": 20.52,
+     "p50": 14.92,
+     "p99": 88.7,
+     "p999": 229.08,
+     "max": 1966.2
+    },
+    "platform_stalls": 20,
+    "platform_stall_max_us": 1966.2,
+    "busy_waits_over_100us": 70,
+    "fault_threads_on_brake_cpu_ms": 507.59,
+    "ipis_on_brake_cpu": 6648,
+    "markers": [
+     {
+      "t_ms": 984.669,
+      "cpu": 1,
+      "text": "CZ fault inject: flood"
+     },
+     {
+      "t_ms": 1775.597,
+      "cpu": 2,
+      "text": "CZ brake SAFE_ENTER reason=3"
+     },
+     {
+      "t_ms": 1777.903,
+      "cpu": 2,
+      "text": "CZ brake SAFE_EXIT after 2292743 ns"
+     },
+     {
+      "t_ms": 2553.488,
+      "cpu": 2,
+      "text": "CZ brake SAFE_ENTER reason=3"
+     },
+     {
+      "t_ms": 2556.777,
+      "cpu": 2,
+      "text": "CZ brake SAFE_EXIT after 3462417 ns"
+     },
+     {
+      "t_ms": 3988.109,
+      "cpu": 2,
+      "text": "CZ fault end: flood"
+     }
+    ]
+   }
+  },
+  {
+   "fault": "kill_sensor",
+   "run": {
+    "id": "kill_sensor-1544689",
+    "fault": "kill_sensor",
+    "label": "Kill sensor driver",
+    "ok": true,
+    "t_fault_ns": 1544688953083,
+    "window_ms": 1500,
+    "brake": {
+     "baseline": {
+      "iterations": 1500,
+      "expected": 1500,
+      "deadline_misses": 7,
+      "skipped_releases": 0,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 1500,
+       "mean": 175.3,
+       "p50": 151.5,
+       "p99": 586.2,
+       "p999": 1604.4,
+       "max": 1610.4
+      },
+      "exec_us": {
+       "n": 1500,
+       "mean": 172.4,
+       "p50": 160.5,
+       "p99": 425.1,
+       "p999": 752.6,
+       "max": 755.6
+      },
+      "sensor_io_us": {
+       "n": 1500,
+       "mean": 165.5,
+       "p50": 153.9,
+       "p99": 416.2,
+       "p999": 737.6,
+       "max": 746.3
+      },
+      "jitter_max_us": 1452.6
+     },
+     "fault": {
+      "iterations": 1492,
+      "expected": 1500,
+      "deadline_misses": 20,
+      "skipped_releases": 8,
+      "stale_iterations": 18,
+      "safe_iterations": 20,
+      "latency_us": {
+       "n": 1492,
+       "mean": 202.3,
+       "p50": 174.4,
+       "p99": 568.2,
+       "p999": 1599.5,
+       "max": 9243
+      },
+      "exec_us": {
+       "n": 1492,
+       "mean": 186.1,
+       "p50": 171.9,
+       "p99": 404.4,
+       "p999": 1586.8,
+       "max": 1602.8
+      },
+      "sensor_io_us": {
+       "n": 1492,
+       "mean": 179,
+       "p50": 164.9,
+       "p99": 396.3,
+       "p999": 1579,
+       "max": 1595.4
+      },
+      "jitter_max_us": 9041.4
+     }
+    },
+    "steer": {
+     "baseline": {
+      "iterations": 750,
+      "expected": 750,
+      "deadline_misses": 0,
+      "skipped_releases": 0,
+      "stale_iterations": 0,
+      "safe_iterations": 0,
+      "latency_us": {
+       "n": 750,
+       "mean": 275.7,
+       "p50": 255.1,
+       "p99": 653.6,
+       "p999": 1442.2,
+       "max": 1442.2
+      },
+      "exec_us": {
+       "n": 750,
+       "mean": 174.7,
+       "p50": 163.9,
+       "p99": 375.3,
+       "p999": 874.4,
+       "max": 874.4
+      },
+      "sensor_io_us": {
+       "n": 750,
+       "mean": 169.4,
+       "p50": 159.4,
+       "p99": 368.1,
+       "p999": 868.6,
+       "max": 868.6
+      },
+      "jitter_max_us": 1181.5
+     },
+     "fault": {
+      "iterations": 749,
+      "expected": 750,
+      "deadline_misses": 3,
+      "skipped_releases": 1,
+      "stale_iterations": 7,
+      "safe_iterations": 9,
+      "latency_us": {
+       "n": 749,
+       "mean": 311.8,
+       "p50": 287.6,
+       "p99": 657.9,
+       "p999": 5510.8,
+       "max": 5510.8
+      },
+      "exec_us": {
+       "n": 749,
+       "mean": 187.4,
+       "p50": 175.2,
+       "p99": 405.3,
+       "p999": 2224.5,
+       "max": 2224.5
+      },
+      "sensor_io_us": {
+       "n": 749,
+       "mean": 182.3,
+       "p50": 170.6,
+       "p99": 398.3,
+       "p999": 2218.3,
+       "max": 2218.3
+      },
+      "jitter_max_us": 5221.2
+     }
+    },
+    "brake_off_cpu_iterations": 0,
+    "brake_noise": {
+     "windows": 23,
+     "max": 165,
+     "mean": 35.8
+    },
+    "steer_noise": {
+     "windows": 23,
+     "max": 61,
+     "mean": 7.1
+    },
+    "brake_miss_excess": false,
+    "steer_miss_excess": false,
+    "recovery": {
+     "process": "wheel_sensors",
+     "cause": "SIGKILL",
+     "detection_path": "channel disconnect",
+     "fault_to_detect_ms": 4.229,
+     "detect_to_ready_ms": 9.793,
+     "fault_to_ready_ms": 14.022,
+     "within_budget": true,
+     "new_pid": 2125852,
+     "old_pid": 1572886
+    },
+    "safety": {
+     "brake_safe_entries": 1,
+     "brake_link_lost_entries": 1,
+     "brake_stale_entries": 0,
+     "brake_first_detect_ms": 2.022,
+     "brake_safe_duration_ms": 20.007,
+     "brake_safe_reason": "read error (driver gone)",
+     "steer_safe_entries": 1
+    },
+    "cluster": {
+     "baseline_display_latency_max_us": 169,
+     "fault_display_latency_max_us": 164,
+     "media_messages": 3
+    },
+    "infotainment": {
+     "peak_alloc_mb": 0,
+     "flood_messages": 0,
+     "restarts": 0
+    },
+    "cpu_peak_pct": [
+     30.2,
+     33.2,
+     45.2
+    ],
+    "events": [
+     {
+      "t": "ev",
+      "ts": 1544688959967,
+      "src": "guardian",
+      "kind": "fault_inject",
+      "proc": "wheel_sensors",
+      "pid": 1572886,
+      "a": 5,
+      "v0": 0,
+      "v1": 0,
+      "text": "kill_sensor"
+     },
+     {
+      "t": "ev",
+      "ts": 1544693187005,
+      "src": "guardian",
+      "kind": "death",
+      "proc": "wheel_sensors",
+      "pid": 1572886,
+      "a": 2,
+      "v0": 4229011,
+      "v1": 0,
+      "text": "channel disconnect"
+     },
+     {
+      "t": "ev",
+      "ts": 1544698348088,
+      "src": "guardian",
+      "kind": "spawn",
+      "proc": "wheel_sensors",
+      "pid": 2125852,
+      "a": 58,
+      "v0": 1544693922580,
+      "v1": 0,
+      "text": "wheel_sensors"
+     },
+     {
+      "t": "ev",
+      "ts": 1544699381509,
+      "src": "guardian",
+      "kind": "exit_status",
+      "proc": "wheel_sensors",
+      "pid": 1572886,
+      "a": 9,
+      "v0": 0,
+      "v1": 0,
+      "text": "SIGKILL"
+     },
+     {
+      "t": "ev",
+      "ts": 1544702979979,
+      "src": "guardian",
+      "kind": "ready",
+      "proc": "wheel_sensors",
+      "pid": 2125852,
+      "a": 0,
+      "v0": 9052392,
+      "v1": 0,
+      "text": "wheel_sensors"
+     },
+     {
+      "t": "ev",
+      "ts": 1544702983826,
+      "src": "guardian",
+      "kind": "restart",
+      "proc": "wheel_sensors",
+      "pid": 2125852,
+      "a": 5,
+      "v0": 14021889,
+      "v1": 9792878,
+      "text": "within budget"
+     },
+     {
+      "t": "ev",
+      "ts": 1544690975026,
+      "src": "brake_ctl",
+      "kind": "safe_enter",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 1,
+      "v0": 1661850,
+      "v1": 1539661,
+      "text": "SAFE_HOLD"
+     },
+     {
+      "t": "ev",
+      "ts": 1544710873778,
+      "src": "brake_ctl",
+      "kind": "safe_exit",
+      "proc": "brake_ctl",
+      "pid": 290840,
+      "a": 0,
+      "v0": 20007159,
+      "v1": 1539681,
+      "text": "normal control"
+     },
+     {
+      "t": "ev",
+      "ts": 1544691013175,
+      "src": "steer_ctl",
+      "kind": "safe_enter",
+      "proc": "steer_ctl",
+      "pid": 290841,
+      "a": 1,
+      "v0": 2695619,
+      "v1": 769815,
+      "text": "assist fading"
+     },
+     {
+      "t": "ev",
+      "ts": 1544708673050,
+      "src": "steer_ctl",
+      "kind": "safe_exit",
+      "proc": "steer_ctl",
+      "pid": 290841,
+      "a": 0,
+      "v0": 17971288,
+      "v1": 769824,
+      "text": "assist restored"
+     },
+     {
+      "t": "ev",
+      "ts": 1544688260474,
+      "src": "telemetry",
+      "kind": "stats_reset",
+      "proc": "telemetry",
+      "pid": 290842,
+      "a": 0,
+      "v0": 0,
+      "v1": 0,
+      "text": "window reset"
+     }
+    ]
+   },
+   "trace": {
+    "duration_ms": 2998.2,
+    "events": 191526,
+    "cps": 2097725513,
+    "fault_at_ms": 1030.282,
+    "brake_wakeups": 6760,
+    "brake_ready_to_running_us": {
+     "n": 6760,
+     "mean": 21.71,
+     "p50": 17.47,
+     "p99": 74.37,
+     "p999": 143.91,
+     "max": 1160.43
+    },
+    "brake_ready_to_running_before_fault_us": {
+     "n": 2344,
+     "mean": 20.4,
+     "p50": 16.75,
+     "p99": 65.65,
+     "p999": 133.71,
+     "max": 1160.43
+    },
+    "brake_ready_to_running_after_fault_us": {
+     "n": 4416,
+     "mean": 22.41,
+     "p50": 17.86,
+     "p99": 76.34,
+     "p999": 143.91,
+     "max": 334.78
+    },
+    "platform_stalls": 9,
+    "platform_stall_max_us": 1160.4,
+    "busy_waits_over_100us": 11,
+    "fault_threads_on_brake_cpu_ms": 4.29,
+    "ipis_on_brake_cpu": 729,
+    "markers": [
+     {
+      "t_ms": 1030.282,
+      "cpu": 0,
+      "text": "CZ fault inject: SIGKILL wheel_sensors pid 1572886"
+     },
+     {
+      "t_ms": 1032.284,
+      "cpu": 2,
+      "text": "CZ brake SAFE_ENTER reason=1"
+     },
+     {
+      "t_ms": 1032.339,
+      "cpu": 1,
+      "text": "CZ steer SAFE_ENTER reason=1"
+     },
+     {
+      "t_ms": 1044.291,
+      "cpu": 0,
+      "text": "CZ guardian: wheel_sensors ready again, restart 9792878 ns"
+     },
+     {
+      "t_ms": 1052.191,
+      "cpu": 2,
+      "text": "CZ brake SAFE_EXIT after 20007159 ns"
+     }
+    ]
+   }
+  }
+ ]
+}
