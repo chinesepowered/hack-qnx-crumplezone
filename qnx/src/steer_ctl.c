@@ -18,6 +18,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/neutrino.h>
+#include <sys/procmgr.h>
 
 #include "control.h"
 #include "cz.h"
@@ -29,7 +30,7 @@
 
 #define WHO "steer_ctl"
 #define SENSOR_TIMEOUT_NS 200000ull
-#define STALE_AGE_NS     6000000ull
+#define STALE_AGE_NS    20000000ull
 #define LINK_PULSE_RECONNECT (_PULSE_CODE_MINAVAIL + 10)
 
 static struct cz_bus *bus;
@@ -39,10 +40,16 @@ static _Atomic int loop_iterations = 0;
 static int link_coid = -1;
 static int guardian_coid = -1;
 
+#define LINK_PULSE_PATHSPACE (_PULSE_CODE_MINAVAIL + 11)
+
 static void *link_thread(void *arg)
 {
     int chid = (int)(intptr_t)arg;
     cz_set_sched(SCHED_FIFO, CZ_PRIO_STEER - 5);
+    struct sigevent pev;
+    SIGEV_PULSE_INIT(&pev, link_coid, CZ_PRIO_STEER - 5, LINK_PULSE_PATHSPACE, 0);
+    if (MsgRegisterEvent(&pev, SYSMGR_COID) == -1 || procmgr_event_notify_add(PROCMGR_EVENT_PATHSPACE, &pev) == -1)
+        cz_log(WHO, "pathspace notification unavailable (%s), polling", strerror(errno));
     int ready_sent = 0;
     for (;;) {
         if (!ready_sent && guardian_coid != -1 && atomic_load(&loop_iterations) >= 10) {
@@ -55,7 +62,7 @@ static void *link_thread(void *arg)
             if (fd >= 0) atomic_store(&fd_steer, fd);
         }
         struct _pulse p;
-        uint64_t to = (need || !ready_sent) ? 1000000ull : 50000000ull;
+        uint64_t to = !ready_sent ? 1000000ull : (need ? 5000000ull : 50000000ull);
         TimerTimeout(CLOCK_MONOTONIC, _NTO_TIMEOUT_RECEIVE, NULL, &to, NULL);
         if (MsgReceivePulse(chid, &p, sizeof(p), NULL) == 0 && p.code == LINK_PULSE_RECONNECT) {
             if (p.value.sival_int >= 0) close(p.value.sival_int);
@@ -115,7 +122,7 @@ int main(void)
 
     struct cz_loop *L = &bus->steer;
     uint64_t reset_gen = atomic_load(&bus->reset_req);
-    uint64_t prev_wake = 0, iterations = 0;
+    uint64_t prev_wake = 0, iterations = 0, off_cpu = 0;
     uint64_t misses_total = L->st.misses_total, misses_win = 0, overruns = L->st.overruns_total;
     uint64_t stale_total = L->st.stale_total, safe_entries = L->st.safe_entries;
     uint32_t lat_max_total = L->st.lat_max_total_ns, lat_max_win = 0, jit_max_win = 0, exec_max_win = 0, resp_max_win = 0;
@@ -131,6 +138,7 @@ int main(void)
         if (MsgReceivePulse(chid, &p, sizeof(p), NULL) == -1) continue;
         if (p.code != CZ_PULSE_TICK) continue;
         uint64_t wake = cz_now_ns();
+        int wake_cpu = (int)SchedGetCpuNum();
         /* Each wake-up serves the release we armed the one-shot timer for, so
          * latency is always measured against the fixed release grid and any
          * lateness, even beyond a period, shows up in full. */
@@ -149,6 +157,7 @@ int main(void)
         int reason = bounded_read(&ss, sizeof(ss));
         uint64_t now = cz_now_ns();
         uint32_t io = (uint32_t)(now - wake);
+        if ((int)SchedGetCpuNum() != cpu || wake_cpu != cpu) off_cpu++;
         if (!reason && (ss.status != CZ_SENSOR_OK || now - ss.sample_ns > STALE_AGE_NS)) reason = CZ_SAFE_STALE;
         int prev_mode = mode;
         if (!reason) {
@@ -226,6 +235,7 @@ int main(void)
         cz_loop_push(L, &smp);
 
         cz_seq_write_begin(&L->seq);
+        L->st.start_ns = per.start_ns;
         L->st.period_ns = per.period_ns;
         L->st.cpu = cpu;
         L->st.prio = CZ_PRIO_STEER;
@@ -243,6 +253,7 @@ int main(void)
         L->st.lat_mean_win_ns = cz_stats_mean(&win_lat);
         L->st.win_count = win_lat.n;
         L->st.stale_total = stale_total;
+        L->st.off_cpu = off_cpu;
         L->st.safe_entries = safe_entries;
         L->st.reset_gen = reset_gen;
         L->st.publish_ns = done;

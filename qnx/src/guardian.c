@@ -158,6 +158,12 @@ static int spawn_child(struct child *c)
         if (prlimit(pid, RLIMIT_AS, &rl, NULL) == -1)
             cz_log(WHO, "prlimit(%s, RLIMIT_AS): %s", name, strerror(errno));
     }
+    /* No core files: dumper would otherwise write the whole address space of a
+     * crashed process before it is torn down, which delays death notification
+     * by hundreds of milliseconds (seconds for a 190 MB leak). */
+    struct rlimit core = { 0, 0 };
+    if (prlimit(pid, RLIMIT_CORE, &core, NULL) == -1)
+        cz_log(WHO, "prlimit(%s, RLIMIT_CORE): %s", name, strerror(errno));
     c->pid = pid;
     c->scoid = -1;
     c->state = CZ_PS_STARTING;

@@ -119,18 +119,18 @@ static void send_loop(struct client *c, const char *id, struct cz_loop *L, uint6
     cz_loop_read_status(L, &st);
     uint64_t head = atomic_load_explicit(&L->head, memory_order_acquire);
     if (head - *tail > CZ_SAMPLES - 64) *tail = head > CZ_SAMPLES - 64 ? head - (CZ_SAMPLES - 64) : 0;
-    out_printf(c, "{\"t\":\"loop\",\"id\":\"%s\",\"ts\":%llu,\"st\":{\"period_ns\":%u,\"cpu\":%d,\"prio\":%d,"
+    out_printf(c, "{\"t\":\"loop\",\"id\":\"%s\",\"ts\":%llu,\"st\":{\"start_ns\":%llu,\"period_ns\":%u,\"cpu\":%d,\"prio\":%d,"
                "\"mode\":%u,\"iter\":%llu,\"miss_total\":%llu,\"miss_win\":%llu,\"overruns\":%llu,"
                "\"lat_last\":%u,\"lat_max_win\":%u,\"lat_max_total\":%u,\"jit_max_win\":%u,\"exec_max_win\":%u,"
-               "\"resp_max_win\":%u,\"lat_mean_win\":%.1f,\"win_n\":%llu,\"stale_total\":%llu,\"safe_entries\":%llu,"
+               "\"resp_max_win\":%u,\"lat_mean_win\":%.1f,\"win_n\":%llu,\"stale_total\":%llu,\"off_cpu\":%llu,\"safe_entries\":%llu,"
                "\"reset_gen\":%llu,\"speed_kmh\":%.2f,\"true_kmh\":%.2f,\"pedal\":%.3f,\"p\":[%.1f,%.1f,%.1f,%.1f],"
                "\"slip\":[%.3f,%.3f,%.3f,%.3f],\"abs\":%u,\"mu\":%.2f,\"torque\":%.2f,\"assist\":%.2f,\"angle\":%.4f},\"s\":[",
-               id, (unsigned long long)cz_now_ns(), st.period_ns, st.cpu, st.prio, st.mode,
+               id, (unsigned long long)cz_now_ns(), (unsigned long long)st.start_ns, st.period_ns, st.cpu, st.prio, st.mode,
                (unsigned long long)st.iterations, (unsigned long long)st.misses_total,
                (unsigned long long)st.misses_win, (unsigned long long)st.overruns_total, st.lat_last_ns,
                st.lat_max_win_ns, st.lat_max_total_ns, st.jit_max_win_ns, st.exec_max_win_ns, st.resp_max_win_ns,
                st.lat_mean_win_ns, (unsigned long long)st.win_count, (unsigned long long)st.stale_total,
-               (unsigned long long)st.safe_entries, (unsigned long long)st.reset_gen, st.speed_kmh,
+               (unsigned long long)st.off_cpu, (unsigned long long)st.safe_entries, (unsigned long long)st.reset_gen, st.speed_kmh,
                st.true_speed_kmh, st.pedal, st.pressure[0], st.pressure[1], st.pressure[2], st.pressure[3],
                st.slip[0], st.slip[1], st.slip[2], st.slip[3], st.abs_mask, st.mu, st.steer_torque,
                st.assist_torque, st.steer_angle);

@@ -173,7 +173,8 @@ static void test_safe_state_sequence(void)
     CHECK(cz_brake_step(&p, &s, &in, 0.001f) == 1);
     CHECK(s.mode == CZ_MODE_SAFE_HOLD);
     CHECK_NEAR(s.pressure[2], held, 1e-6);
-    for (int k = 0; k < 40; k++) cz_brake_step(&p, &s, &in, 0.001f);
+    int hold_steps = (int)(p.safe_hold_s / 0.001f);
+    for (int k = 0; k < hold_steps - 10; k++) cz_brake_step(&p, &s, &in, 0.001f);
     CHECK(s.mode == CZ_MODE_SAFE_HOLD);
     CHECK_NEAR(s.pressure[2], held, 1e-6);
     /* Past the hold budget: SAFE_STOP ramps toward the safe pressure. */

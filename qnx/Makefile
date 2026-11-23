@@ -27,8 +27,11 @@ $(OUT)/obj/%.o: src/%.c common/*.h
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
+# Statically linked: a restarted process skips dynamic linking, which is a
+# large part of spawn-to-ready time under emulation. telemetry links
+# libsocket, which only exists as a shared library, so it stays dynamic.
 $(OUT)/%: $(OUT)/obj/%.o $(COMMON_OBJ)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
+	$(CC) $(CFLAGS) -static -Wl,--no-warn-execstack -o $@ $^ $(LDLIBS)
 
 $(OUT)/telemetry: $(OUT)/obj/telemetry.o $(COMMON_OBJ)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS) -lsocket

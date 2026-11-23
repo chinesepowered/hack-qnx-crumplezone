@@ -22,7 +22,7 @@ void cz_brake_default_params(cz_brake_params_t *p)
     p->rate_apply = 600.0f;
     p->rate_release = 2500.0f;
     p->vref_decel_max = 12.0f;
-    p->safe_hold_s = 0.050f;
+    p->safe_hold_s = 0.100f;
     p->safe_pressure_bar = 30.0f;
     p->safe_rate = 200.0f;
     p->resume_samples = 3;

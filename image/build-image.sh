@@ -36,7 +36,7 @@ sed "s#@CZ_STARTUP@#$STARTUP#" "$REPO/image/mkqnximage/snippets/definitions.zz_c
 
 # procnto -h keeps idle CPUs spinning instead of halting (see options.crumple.in).
 PROC_OPTS=""
-[ "${CZ_NOHALT:-1}" = 1 ] && PROC_OPTS="-h"
+[ "${CZ_NOHALT:-0}" = 1 ] && PROC_OPTS="-h"
 sed "s#@CZ_PROC_OPTIONS@#$PROC_OPTS#" "$REPO/image/mkqnximage/snippets/options.crumple.in" > "$EXTRA/snippets/options.crumple"
 
 SSH_KEY="${CZ_SSH_KEY:-$HOME/.ssh/id_ed25519.pub}"

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crumple Zone</title>
+  <link rel="stylesheet" href="xterm.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div>
+        <h1>CRUMPLE ZONE</h1>
+        <p>Mixed-criticality vehicle computer on QNX OS 8.0</p>
+      </div>
+    </div>
+    <div class="chips" id="platform">
+      <span class="chip" id="chip-os">QNX</span>
+      <span class="chip" id="chip-vm">QEMU</span>
+      <span class="chip" id="chip-up">uptime</span>
+      <span class="chip link" id="chip-link"><i></i><b>connecting</b></span>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="col left">
+      <article class="card loop" id="card-brake">
+        <header>
+          <h2>Brake-by-wire</h2>
+          <div class="tags"><span>1 kHz</span><span>SCHED_FIFO 60</span><span>CPU 2</span></div>
+          <span class="mode" id="brake-mode">NORMAL</span>
+        </header>
+        <div class="stats">
+          <div class="stat"><label>Wake-up latency p50</label><b id="brake-p50">-</b></div>
+          <div class="stat"><label>p99 (last 10 s)</label><b id="brake-p99">-</b></div>
+          <div class="stat"><label>Worst (last 10 s)</label><b id="brake-max">-</b></div>
+          <div class="stat"><label>Sensor read p99</label><b id="brake-io">-</b></div>
+          <div class="stat miss"><label>Deadline misses (10 s)</label><b id="brake-miss">-</b><small id="brake-miss-note">emulator noise floor</small></div>
+        </div>
+        <canvas class="chart" id="chart-brake" width="1120" height="190"></canvas>
+      </article>
+
+      <article class="card loop small" id="card-steer">
+        <header>
+          <h2>Steering assist</h2>
+          <div class="tags"><span>500 Hz</span><span>SCHED_FIFO 55</span><span>CPU 1</span></div>
+          <span class="mode" id="steer-mode">NORMAL</span>
+        </header>
+        <div class="stats">
+          <div class="stat"><label>Latency p50</label><b id="steer-p50">-</b></div>
+          <div class="stat"><label>p99 (last 10 s)</label><b id="steer-p99">-</b></div>
+          <div class="stat"><label>Worst (last 10 s)</label><b id="steer-max">-</b></div>
+          <div class="stat"><label>Assist torque</label><b id="steer-assist">-</b></div>
+          <div class="stat miss"><label>Deadline misses (10 s)</label><b id="steer-miss">-</b></div>
+        </div>
+        <canvas class="chart" id="chart-steer" width="1120" height="110"></canvas>
+      </article>
+
+      <article class="card chaos">
+        <header><h2>Chaos panel</h2><span class="hint" id="chaos-phase">faults go into the non-critical side only</span></header>
+        <div class="buttons">
+          <button data-fault="crash"><b>Crash infotainment</b><small>segfault</small></button>
+          <button data-fault="storm"><b>CPU storm</b><small>spin every core</small></button>
+          <button data-fault="leak"><b>Memory leak</b><small>until RLIMIT_AS</small></button>
+          <button data-fault="flood"><b>Message flood</b><small>spam the cluster</small></button>
+          <button data-fault="kill_sensor" class="sensor"><b>Kill sensor driver</b><small>SIGKILL resmgr</small></button>
+          <button id="btn-report" class="report" disabled><b>Incident report</b><small>AI, verified</small></button>
+        </div>
+        <div class="result" id="run-result"><span class="muted">No chaos run yet. Every number on this screen is measured on QNX.</span></div>
+      </article>
+
+      <article class="card timeline">
+        <header><h2>Event timeline</h2><span class="hint">guardian, controllers, cluster (guest clock)</span></header>
+        <ol id="events"></ol>
+      </article>
+    </section>
+
+    <section class="col right">
+      <article class="card vehicle">
+        <header><h2>Vehicle</h2><span class="hint" id="road">road</span></header>
+        <div class="veh">
+          <div class="speed"><b id="speed">0</b><span>km/h</span></div>
+          <div class="pedal"><label>Brake pedal</label><div class="bar"><i id="pedal-bar"></i></div><span id="pedal">0%</span></div>
+          <div class="wheels" id="wheels">
+            <div class="wheel" data-w="0"><label>FL</label><div class="bar v"><i></i></div><span>0</span><em>ABS</em></div>
+            <div class="wheel" data-w="1"><label>FR</label><div class="bar v"><i></i></div><span>0</span><em>ABS</em></div>
+            <div class="wheel" data-w="2"><label>RL</label><div class="bar v"><i></i></div><span>0</span><em>ABS</em></div>
+            <div class="wheel" data-w="3"><label>RR</label><div class="bar v"><i></i></div><span>0</span><em>ABS</em></div>
+          </div>
+        </div>
+        <div class="cluster-line"><span>Cluster display latency</span><b id="cluster-lat">-</b><span>media msgs</span><b id="cluster-media">-</b></div>
+      </article>
+
+      <article class="card procs">
+        <header><h2>Processes</h2><span class="hint">supervised by guardian</span></header>
+        <table>
+          <thead><tr><th>process</th><th>pid</th><th>prio</th><th>cpu</th><th>cpu %</th><th>memory</th><th>restarts</th></tr></thead>
+          <tbody id="proc-rows"></tbody>
+        </table>
+        <div class="cores" id="cores"></div>
+      </article>
+
+      <article class="card console">
+        <header><h2>QNX console</h2><span class="hint">serial port of the QNX target</span></header>
+        <div id="term"></div>
+      </article>
+    </section>
+  </main>
+
+  <aside class="report-panel" id="report-panel" hidden>
+    <header>
+      <h2>Incident report</h2>
+      <span class="badge" id="report-badge">pending</span>
+      <button id="report-close" aria-label="Close">Close</button>
+    </header>
+    <div class="report-meta" id="report-meta"></div>
+    <div class="report-body" id="report-body"></div>
+  </aside>
+
+  <div class="callout" id="callout" hidden></div>
+  <script src="main.js"></script>
+</body>
+</html>

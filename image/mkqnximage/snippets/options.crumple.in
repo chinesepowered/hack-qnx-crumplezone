@@ -1,7 +1,7 @@
 # Crumple Zone: extra procnto options (sourced by mkqnximage as bash).
-# @CZ_PROC_OPTIONS@ is filled in by image/build-image.sh. Under QEMU TCG we pass
-# -h (no CPU halt in the idle thread): a halted emulated CPU has to be woken by
-# a host thread signal before it notices an interrupt, which adds 100 us or more
-# of emulator latency to every timer wake-up. A spinning idle thread sees it at
-# once. On real hardware or KVM leave it empty.
+# @CZ_PROC_OPTIONS@ is filled in by image/build-image.sh (empty by default).
+# CZ_NOHALT=1 passes -h (no CPU halt in the idle thread). It trims about 20 us of
+# emulator wake-up latency under QEMU TCG, but in our runs it led to a hang:
+# two CPUs looping in the TLB-invalidation path (x86_64_as_inv) while the third
+# spun in the idle loop. It is off by default and kept only for experiments.
 PROC_OPTIONS="@CZ_PROC_OPTIONS@"

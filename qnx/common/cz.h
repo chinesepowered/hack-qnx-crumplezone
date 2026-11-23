@@ -169,6 +169,7 @@ struct cz_sample {
 };
 
 struct cz_loop_status {
+    uint64_t start_ns;          /* release of iteration 0: release(n) = start_ns + n * period_ns */
     uint32_t period_ns;
     int32_t  cpu;
     int32_t  prio;
@@ -186,6 +187,7 @@ struct cz_loop_status {
     double   lat_mean_win_ns;
     uint64_t win_count;
     uint64_t stale_total;       /* iterations with stale inputs */
+    uint64_t off_cpu;           /* iterations observed running on a CPU other than the pinned one */
     uint64_t safe_entries;
     uint64_t reset_gen;
     uint64_t publish_ns;

@@ -54,7 +54,8 @@ if [ "${1:-}" = "--bg" ]; then
     rm -f "$LOG"
     qemu-system-x86_64 "${ARGS[@]}" \
         -chardev "socket,id=ser0,host=127.0.0.1,port=${CONSOLE_PORT},server=on,wait=off,logfile=$LOG" \
-        -serial chardev:ser0 -monitor none -pidfile "$PIDFILE" -daemonize 2>"$REPO/build/qemu-stderr.log"
+        -serial chardev:ser0 -monitor "unix:$REPO/build/qemu-monitor.sock,server=on,wait=off" \
+        -pidfile "$PIDFILE" -daemonize 2>"$REPO/build/qemu-stderr.log"
     echo "QEMU started (pid $(cat "$PIDFILE")); console tcp 127.0.0.1:${CONSOLE_PORT}, log $LOG"
     [ "${CZ_HOST_RT:-1}" = 1 ] && "$REPO/scripts/host-rt.sh" "$(cat "$PIDFILE")" || true
     for _ in $(seq 1 120); do

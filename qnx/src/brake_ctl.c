@@ -29,6 +29,7 @@
 #include <unistd.h>
 #include <sys/dispatch.h>
 #include <sys/neutrino.h>
+#include <sys/procmgr.h>
 
 #include "control.h"
 #include "cz.h"
@@ -40,7 +41,7 @@
 
 #define WHO "brake_ctl"
 #define SENSOR_TIMEOUT_NS   200000ull     /* bound on each driver round trip */
-#define STALE_AGE_NS       3000000ull     /* sample older than three periods is stale */
+#define STALE_AGE_NS      10000000ull     /* sample older than ten periods is stale (driver alive but frozen) */
 #define LINK_PULSE_RECONNECT (_PULSE_CODE_MINAVAIL + 10)
 #define PEDAL_DIVIDER 4                   /* pedal sampled at 1 kHz / 4 */
 
@@ -55,10 +56,19 @@ static int guardian_coid = -1;
 
 /* Helper thread: (re)opens the sensor devices and the cluster connection.
  * Runs below the loop's priority, on the same CPU, only when needed. */
+#define LINK_PULSE_PATHSPACE (_PULSE_CODE_MINAVAIL + 11)
+
 static void *link_thread(void *arg)
 {
     int chid = (int)(intptr_t)arg;
     cz_set_sched(SCHED_FIFO, CZ_PRIO_BRAKE - 5);
+    /* Wake up whenever the pathname space changes (a resource manager attached
+     * or detached a path): a restarted sensor driver is picked up the moment it
+     * registers /dev/vehicle/..., without polling open() in a tight loop. */
+    struct sigevent pev;
+    SIGEV_PULSE_INIT(&pev, link_coid, CZ_PRIO_BRAKE - 5, LINK_PULSE_PATHSPACE, 0);
+    if (MsgRegisterEvent(&pev, SYSMGR_COID) == -1 || procmgr_event_notify_add(PROCMGR_EVENT_PATHSPACE, &pev) == -1)
+        cz_log(WHO, "pathspace notification unavailable (%s), polling", strerror(errno));
     int ready_sent = 0;
     for (;;) {
         /* Report READY to the guardian once the loop has run 10 periods. The
@@ -84,7 +94,7 @@ static void *link_thread(void *arg)
         }
         /* Wait for a reconnect request (pulse value = fd to close) or poll every 1 ms. */
         struct _pulse p;
-        uint64_t to = (need || !ready_sent) ? 1000000ull : 50000000ull;
+        uint64_t to = !ready_sent ? 1000000ull : (need ? 5000000ull : 50000000ull);
         TimerTimeout(CLOCK_MONOTONIC, _NTO_TIMEOUT_RECEIVE, NULL, &to, NULL);
         if (MsgReceivePulse(chid, &p, sizeof(p), NULL) == 0 && p.code == LINK_PULSE_RECONNECT) {
             int old = p.value.sival_int;
@@ -159,7 +169,7 @@ int main(void)
 
     struct cz_loop *L = &bus->brake;
     uint64_t reset_gen = atomic_load(&bus->reset_req);
-    uint64_t prev_wake = 0, iterations = 0;
+    uint64_t prev_wake = 0, iterations = 0, off_cpu = 0;
     uint64_t misses_total = L->st.misses_total, misses_win = 0, overruns = L->st.overruns_total;
     uint64_t stale_total = L->st.stale_total, safe_entries = L->st.safe_entries;
     uint32_t lat_max_total = L->st.lat_max_total_ns, lat_max_win = 0, jit_max_win = 0;
@@ -175,6 +185,7 @@ int main(void)
         if (MsgReceivePulse(chid, &p, sizeof(p), NULL) == -1) continue;
         if (p.code != CZ_PULSE_TICK) continue;
         uint64_t wake = cz_now_ns();
+        int wake_cpu = (int)SchedGetCpuNum();
 
         /* Each wake-up serves the release we armed the one-shot timer for, so
          * latency is always measured against the fixed release grid and any
@@ -206,6 +217,7 @@ int main(void)
         ps = pedal_sample;
         uint64_t now = cz_now_ns();
         uint32_t io = (uint32_t)(now - wake);
+        if ((int)SchedGetCpuNum() != cpu || wake_cpu != cpu) off_cpu++;
         if (!reason) {
             if (ws.status != CZ_SENSOR_OK || ps.status != CZ_SENSOR_OK) reason = CZ_SAFE_STALE;
             else if (now - ws.sample_ns > STALE_AGE_NS || now - ps.sample_ns > STALE_AGE_NS + 4 * CZ_BRAKE_PERIOD_NS)
@@ -298,6 +310,7 @@ int main(void)
         cz_loop_push(L, &smp);
 
         cz_seq_write_begin(&L->seq);
+        L->st.start_ns = per.start_ns;
         L->st.period_ns = per.period_ns;
         L->st.cpu = cpu;
         L->st.prio = CZ_PRIO_BRAKE;
@@ -315,6 +328,7 @@ int main(void)
         L->st.lat_mean_win_ns = cz_stats_mean(&win_lat);
         L->st.win_count = win_lat.n;
         L->st.stale_total = stale_total;
+        L->st.off_cpu = off_cpu;
         L->st.safe_entries = safe_entries;
         L->st.reset_gen = reset_gen;
         L->st.publish_ns = done;
