@@ -40,7 +40,7 @@
 #include "stats.h"
 
 #define WHO "brake_ctl"
-#define SENSOR_TIMEOUT_NS   200000ull     /* bound on each driver round trip */
+#define SENSOR_TIMEOUT_NS   400000ull     /* bound on each driver round trip (40% of a brake period) */
 #define STALE_AGE_NS      10000000ull     /* sample older than ten periods is stale (driver alive but frozen) */
 #define LINK_PULSE_RECONNECT (_PULSE_CODE_MINAVAIL + 10)
 #define PEDAL_DIVIDER 4                   /* pedal sampled at 1 kHz / 4 */

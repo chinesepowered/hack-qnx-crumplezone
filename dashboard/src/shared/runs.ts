@@ -106,6 +106,21 @@ export class Recorder {
     return out;
   }
 
+  /** The last sample released before t0 and the first released at or after t1 (null when none). */
+  neighbours(id: LoopId, t0: number, t1: number): { before: SampleRec | null; after: SampleRec | null } {
+    const arr = this.samples[id];
+    const first = (t: number) => {
+      let lo = 0, hi = arr.length;
+      while (lo < hi) {
+        const mid = (lo + hi) >> 1;
+        if (arr[mid].t < t) lo = mid + 1; else hi = mid;
+      }
+      return lo;
+    };
+    const b = first(t0) - 1, a = first(t1);
+    return { before: b >= 0 ? arr[b] : null, after: a < arr.length ? arr[a] : null };
+  }
+
   eventsBetween(t0: number, t1: number): EventMsg[] {
     return this.events.filter((e) => e.ts >= t0 && e.ts < t1);
   }
@@ -124,6 +139,20 @@ export interface LoopWindow {
   jitter_max_us: number;
 }
 
+/**
+ * Releases the loop skipped between two consecutive samples (a gap in the
+ * iteration index) whose release times fall inside [t0, t1). Counting by
+ * release time keeps a gap that straddles a window edge from dropping out of
+ * both the "ran" and the "skipped" totals.
+ */
+export function skippedBetween(a: SampleRec, b: SampleRec, period: number, t0: number, t1: number): number {
+  const gap = b.n - a.n - 1;
+  if (gap <= 0) return 0;
+  const lo = Math.max(1, Math.ceil((t0 - a.t) / period));
+  const hi = Math.min(gap, Math.ceil((t1 - a.t) / period) - 1);
+  return Math.max(0, hi - lo + 1);
+}
+
 export function summarizeWindow(rec: Recorder, id: LoopId, t0: number, t1: number): LoopWindow {
   const w = rec.window(id, t0, t1);
   const st = rec.status[id];
@@ -138,7 +167,15 @@ export function summarizeWindow(rec: Recorder, id: LoopId, t0: number, t1: numbe
     if (s.flags & SF_MISS) misses++;
     if (s.flags & SF_STALE) stale++;
     if (s.flags & SF_SAFE) safe++;
-    if (i > 0 && s.n > w[i - 1].n + 1) skipped += s.n - w[i - 1].n - 1;
+    if (i > 0) skipped += skippedBetween(w[i - 1], s, period, t0, t1);
+  }
+  // gaps that straddle the window edges
+  const { before, after } = rec.neighbours(id, t0, t1);
+  if (w.length) {
+    if (before) skipped += skippedBetween(before, w[0], period, t0, t1);
+    if (after) skipped += skippedBetween(w[w.length - 1], after, period, t0, t1);
+  } else if (before && after) {
+    skipped += skippedBetween(before, after, period, t0, t1);
   }
   const r = (x: Summary): Summary => ({
     n: x.n, mean: round(x.mean, 1), p50: round(x.p50, 1), p99: round(x.p99, 1), p999: round(x.p999, 1), max: round(x.max, 1),
@@ -180,11 +217,16 @@ export interface RunResult {
   brake: { baseline: LoopWindow; fault: LoopWindow };
   steer: { baseline: LoopWindow; fault: LoopWindow };
   brake_off_cpu_iterations: number; // brake iterations that ran off the pinned CPU during the run
+  /** misses in fault-free windows of the same length during the previous minute (platform noise envelope) */
+  brake_noise: { windows: number; max: number; mean: number };
+  steer_noise: { windows: number; max: number; mean: number };
   brake_miss_excess: boolean; // more misses than the baseline rate explains (99.9% Poisson bound)
   steer_miss_excess: boolean;
   recovery: Recovery | null;
   safety: {
     brake_safe_entries: number;
+    brake_link_lost_entries: number; // driver gone, hung or disconnected
+    brake_stale_entries: number; // driver alive but sample older than 10 periods (simulated plant paused)
     brake_first_detect_ms: number | null;
     brake_safe_duration_ms: number | null;
     brake_safe_reason: string | null;
@@ -278,8 +320,9 @@ function emptyResult(fault: FaultName, error: string, windowMs: number): RunResu
   return {
     id: `${fault}-${Date.now()}`, fault, label: FAULT_LABELS[fault], ok: false, error, t_fault_ns: 0, window_ms: windowMs,
     brake: { baseline: emptyWindow(), fault: emptyWindow() }, steer: { baseline: emptyWindow(), fault: emptyWindow() },
-    brake_off_cpu_iterations: 0, brake_miss_excess: false, steer_miss_excess: false, recovery: null,
-    safety: { brake_safe_entries: 0, brake_first_detect_ms: null, brake_safe_duration_ms: null, brake_safe_reason: null, steer_safe_entries: 0 },
+    brake_off_cpu_iterations: 0, brake_noise: { windows: 0, max: 0, mean: 0 }, steer_noise: { windows: 0, max: 0, mean: 0 },
+    brake_miss_excess: false, steer_miss_excess: false, recovery: null,
+    safety: { brake_safe_entries: 0, brake_link_lost_entries: 0, brake_stale_entries: 0, brake_first_detect_ms: null, brake_safe_duration_ms: null, brake_safe_reason: null, steer_safe_entries: 0 },
     cluster: { baseline_display_latency_max_us: 0, fault_display_latency_max_us: 0, media_messages: 0 },
     infotainment: { peak_alloc_mb: 0, flood_messages: 0, restarts: 0 }, cpu_peak_pct: [], events: [],
   };
@@ -295,8 +338,14 @@ export function analyse(rec: Recorder, fault: FaultName, t0: number, winNs: numb
   res.t_fault_ns = t0;
   res.brake = { baseline: summarizeWindow(rec, 'brake', baseT0, baseT0 + winNs), fault: summarizeWindow(rec, 'brake', t0, t1) };
   res.steer = { baseline: summarizeWindow(rec, 'steer', baseT0, baseT0 + winNs), fault: summarizeWindow(rec, 'steer', t0, t1) };
-  res.brake_miss_excess = res.brake.fault.deadline_misses > poissonUpper999(res.brake.baseline.deadline_misses);
-  res.steer_miss_excess = res.steer.fault.deadline_misses > poissonUpper999(res.steer.baseline.deadline_misses);
+  // Platform noise is bursty, so one baseline window is not enough: compare with
+  // the noisiest fault-free window of the same length in the previous minute.
+  res.brake_noise = noiseEnvelope(rec, 'brake', t0, winNs);
+  res.steer_noise = noiseEnvelope(rec, 'steer', t0, winNs);
+  const excess = (fault: number, base: number, env: { max: number }) =>
+    fault > Math.max(poissonUpper999(base), Math.ceil(env.max * 1.25) + 3);
+  res.brake_miss_excess = excess(res.brake.fault.deadline_misses, res.brake.baseline.deadline_misses, res.brake_noise);
+  res.steer_miss_excess = excess(res.steer.fault.deadline_misses, res.steer.baseline.deadline_misses, res.steer_noise);
 
   const evs = rec.eventsBetween(t0 - 50e6, t1);
   res.events = evs.filter((e) => e.kind !== 'deadline_miss').slice(0, 200);
@@ -324,9 +373,12 @@ export function analyse(rec: Recorder, fault: FaultName, t0: number, winNs: numb
   const bEnter = evs.filter((e) => e.src === 'brake_ctl' && e.kind === 'safe_enter' && e.ts >= t0);
   const bExit = evs.filter((e) => e.src === 'brake_ctl' && e.kind === 'safe_exit' && e.ts >= t0);
   res.safety.brake_safe_entries = bEnter.length;
+  res.safety.brake_stale_entries = bEnter.filter((e) => e.a === 3).length;
+  res.safety.brake_link_lost_entries = bEnter.length - res.safety.brake_stale_entries;
   res.safety.steer_safe_entries = evs.filter((e) => e.src === 'steer_ctl' && e.kind === 'safe_enter' && e.ts >= t0).length;
-  if (bEnter.length) {
-    const first = bEnter[0];
+  const linkLoss = bEnter.filter((e) => e.a !== 3);
+  if (linkLoss.length || bEnter.length) {
+    const first = linkLoss[0] ?? bEnter[0];
     res.safety.brake_first_detect_ms = round((first.ts - t0) / 1e6, 3);
     res.safety.brake_safe_reason = SAFE_REASONS[first.a] ?? String(first.a);
     const ex = bExit.find((e) => e.ts >= first.ts);
@@ -354,6 +406,20 @@ export function analyse(rec: Recorder, fault: FaultName, t0: number, winNs: numb
   const ncpu = procs[0]?.msg.cpus.length ?? 0;
   res.cpu_peak_pct = Array.from({ length: ncpu }, (_, i) => round(Math.max(0, ...procs.map((p) => p.msg.cpus[i] ?? 0)), 1));
   return res;
+}
+
+/** Deadline misses in equal-length windows before t0 that contain no fault (and no aftermath). */
+export function noiseEnvelope(rec: Recorder, id: LoopId, t0: number, winNs: number, lookbackNs = 60e9): { windows: number; max: number; mean: number } {
+  const faults = rec.events.filter((e) => e.kind === 'fault_inject').map((e) => e.ts);
+  const first = rec.samples[id][0]?.t ?? t0;
+  const counts: number[] = [];
+  for (let end = t0; end - winNs >= Math.max(first, t0 - lookbackNs); end -= winNs) {
+    const a = end - winNs;
+    if (faults.some((f) => f >= a - 8e9 && f < end)) continue;
+    counts.push(summarizeWindow(rec, id, a, end).deadline_misses);
+  }
+  if (!counts.length) return { windows: 0, max: 0, mean: 0 };
+  return { windows: counts.length, max: Math.max(...counts), mean: round(counts.reduce((x, y) => x + y, 0) / counts.length, 1) };
 }
 
 /** Flags-aware helpers for the UI */

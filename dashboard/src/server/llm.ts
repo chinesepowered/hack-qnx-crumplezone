@@ -44,7 +44,15 @@ export async function chat(messages: ChatMessage[], opts: { maxTokens?: number; 
       const res = await fetch(`${base.replace(/\/$/, '')}/chat/completions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` },
-        body: JSON.stringify({ model, messages, max_tokens: opts.maxTokens ?? 2500, temperature: opts.temperature ?? 0.2 }),
+        body: JSON.stringify({
+          model,
+          messages,
+          max_tokens: opts.maxTokens ?? 4000,
+          temperature: opts.temperature ?? 0.2,
+          // Qwen3 reasons before answering by default; for a short factual
+          // summary the hidden reasoning only costs tokens and latency.
+          ...(model.toLowerCase().includes('qwen') ? { chat_template_kwargs: { enable_thinking: false } } : {}),
+        }),
         signal: AbortSignal.timeout(180000),
       });
       if (!res.ok) throw new Error(`${model}: HTTP ${res.status} ${(await res.text()).slice(0, 200)}`);

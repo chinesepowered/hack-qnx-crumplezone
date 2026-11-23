@@ -29,7 +29,7 @@
 #include "stats.h"
 
 #define WHO "steer_ctl"
-#define SENSOR_TIMEOUT_NS 200000ull
+#define SENSOR_TIMEOUT_NS   400000ull     /* bound on each driver round trip (20% of a steering period) */
 #define STALE_AGE_NS    20000000ull
 #define LINK_PULSE_RECONNECT (_PULSE_CODE_MINAVAIL + 10)
 

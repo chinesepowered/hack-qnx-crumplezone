@@ -50,6 +50,22 @@ describe('recorder and analysis', () => {
     expect(w.latency_us.p50).toBe(100);
   });
 
+  it('counts releases skipped across a window edge', () => {
+    const rec = new Recorder();
+    // releases 495..504 skipped: the gap straddles t = 500 ms
+    feed(rec, 'brake', 0, 1000, 1e6, (n) => ({ skip: n >= 495 && n <= 504 }));
+    const before = summarizeWindow(rec, 'brake', 0, 500e6);
+    const after = summarizeWindow(rec, 'brake', 500e6, 1000e6);
+    expect(before.iterations + before.skipped_releases).toBe(before.expected);
+    expect(after.iterations + after.skipped_releases).toBe(after.expected);
+    expect(before.skipped_releases).toBe(5);
+    expect(after.skipped_releases).toBe(5);
+    // a window entirely inside the gap
+    const inside = summarizeWindow(rec, 'brake', 497e6, 500e6);
+    expect(inside.iterations).toBe(0);
+    expect(inside.skipped_releases).toBe(3);
+  });
+
   it('ignores replayed samples after a reconnect', () => {
     const rec = new Recorder();
     feed(rec, 'brake', 0, 100, 1e6, () => ({}));

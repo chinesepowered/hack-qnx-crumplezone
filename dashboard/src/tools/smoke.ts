@@ -51,8 +51,8 @@ function checksFor(r: RunResult, accel: string, info: string[]): Check[] {
       `first safe-state entry ${det} ms after the kill (worst wake-up latency in window ${bf.latency_us.max} us)`);
     add('normal control resumed', r.safety.brake_safe_duration_ms !== null, `${r.safety.brake_safe_duration_ms} ms in safe state`);
   } else {
-    add('brake never entered a safe state', r.safety.brake_safe_entries === 0 || r.safety.brake_safe_reason === 'stale sample',
-      `${r.safety.brake_safe_entries} entries`);
+    add('brake never lost its sensor link', r.safety.brake_link_lost_entries === 0,
+      `${r.safety.brake_link_lost_entries} link losses (${r.safety.brake_stale_entries} stale-sample entries from emulator pauses of the plant)`);
   }
   if (r.fault === 'crash' || r.fault === 'leak') {
     add('infotainment restarted', !!r.recovery, r.recovery ? `${r.recovery.cause}; ${r.recovery.fault_to_ready_ms ?? r.recovery.detect_to_ready_ms} ms` : 'no restart event');

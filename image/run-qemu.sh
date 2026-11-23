@@ -29,17 +29,23 @@ fi
 
 [ -f "$WORK/output/ifs.bin" ] || { echo "no image: run make image first" >&2; exit 1; }
 
+mkdir -p "$REPO/build"
 if [ -w /dev/kvm ]; then
     ACCEL=(-accel kvm -cpu host)
     echo "accelerator: KVM"
+    echo KVM > "$REPO/build/qemu-accel.txt"
 else
     # TCG. IvyBridge: AVX but no AVX2. With -cpu max, OpenSSL's AVX2 code paths
     # crash under QEMU 8.2 TCG (sshd dies with SIGSEGV); IvyBridge avoids them.
     ACCEL=(-accel tcg,thread=multi -cpu IvyBridge-IBRS)
     echo "accelerator: TCG (no usable /dev/kvm)"
+    echo TCG > "$REPO/build/qemu-accel.txt"
 fi
 
-ARGS=(-name crumple,debug-threads=on -smp "$SMP" -m 2G "${ACCEL[@]}"
+# -mem-prealloc backs all guest RAM up front: otherwise the host takes a page
+# fault the first time the guest touches each page (190 MB during the memory
+# leak fault), and those host-side stalls freeze other vCPUs too.
+ARGS=(-name crumple,debug-threads=on -smp "$SMP" -m 2G -mem-prealloc "${ACCEL[@]}"
       -drive "file=$WORK/output/disk-qemu.vmdk,if=ide,id=drv0"
       -netdev "user,id=net0,hostfwd=tcp:127.0.0.1:${TELEMETRY_PORT}-:7300,hostfwd=tcp:127.0.0.1:${SSH_PORT}-:22"
       -device virtio-net-pci,netdev=net0

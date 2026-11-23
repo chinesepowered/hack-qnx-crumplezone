@@ -98,7 +98,7 @@ function onMsg(m: any): void {
       if (state.events.length > 2000) state.events.splice(0, 500);
       markerFor(m);
       if (m.kind === 'restart' || m.kind === 'death') state.restartFlash.set(m.proc, Date.now());
-      renderEvents();
+      scheduleEvents();
       break;
     case 'proc':
       state.proc = m;
@@ -212,22 +212,23 @@ function drawChart(canvas: HTMLCanvasElement, id: LoopId): void {
       if (p.flags & (SF_MISS | SF_OVERRUN)) miss[c] = 1;
       if (p.mode !== 0) safe[c] = 1;
     }
+    // one batched path per layer: far cheaper than a fillRect per column
+    g.fillStyle = '#f5a52422';
+    g.beginPath();
+    for (let c = 0; c < cols; c++) if (safe[c]) g.rect(left + c, top, 1, ch - top - bottom);
+    g.fill();
+    g.fillStyle = id === 'brake' ? '#38bdf8d9' : '#5eead4d9';
+    g.beginPath();
     for (let c = 0; c < cols; c++) {
-      if (safe[c]) {
-        g.fillStyle = '#f5a52422';
-        g.fillRect(left + c, top, 1, ch - top - bottom);
-      }
       if (maxv[c] === 0) continue;
       const y1 = yOf(maxv[c], ch, top, bottom), y0 = yOf(minv[c], ch, top, bottom);
-      g.fillStyle = id === 'brake' ? '#38bdf8' : '#5eead4';
-      g.globalAlpha = 0.85;
-      g.fillRect(left + c, y1, 1, Math.max(1, y0 - y1 + 1));
-      g.globalAlpha = 1;
-      if (miss[c]) {
-        g.fillStyle = '#ef4444';
-        g.fillRect(left + c, top, 1, 4);
-      }
+      g.rect(left + c, y1, 1, Math.max(1, y0 - y1 + 1));
     }
+    g.fill();
+    g.fillStyle = '#ef4444';
+    g.beginPath();
+    for (let c = 0; c < cols; c++) if (miss[c]) g.rect(left + c, top, 1, 4);
+    g.fill();
     // fault / recovery markers: fault labels along the top, recovery labels along the bottom
     g.textAlign = 'left';
     let lastTop = -1e9, lastBottom = -1e9;
@@ -337,6 +338,12 @@ function eventText(e: EventMsg): { txt: string; cls: string } | null {
   }
 }
 
+let eventsTimer = 0;
+function scheduleEvents(): void {
+  if (eventsTimer) return;
+  eventsTimer = window.setTimeout(() => { eventsTimer = 0; renderEvents(); }, 250);
+}
+
 function renderEvents(): void {
   const ol = $('events');
   const rows: string[] = [];
@@ -377,15 +384,16 @@ function renderRun(): void {
     return;
   }
   const rec = r.recovery;
-  const big = rec ? `${(rec.fault_to_ready_ms ?? rec.detect_to_ready_ms).toFixed(1)} ms` : 'no restart needed';
+  const big = rec ? `${(rec.fault_to_ready_ms ?? rec.detect_to_ready_ms).toFixed(1)} ms` : 'no restart';
   const bf = r.brake.fault, bb = r.brake.baseline;
   el.innerHTML = `
     <div class="kv"><label>${r.label}</label><span class="big">${big}</span></div>
-    <div class="kv"><label>${rec ? (rec.fault_to_ready_ms !== null ? 'fault to ready' : 'death to ready') : 'recovery'}</label><b>${rec ? rec.cause : '-'}</b></div>
+    <div class="kv"><label>${rec ? (rec.fault_to_ready_ms !== null ? 'fault to ready' : 'death to ready') : 'recovery'}</label><b>${rec ? rec.cause : 'not needed'}</b></div>
     <div class="kv"><label>brake misses, fault window</label><b>${bf.deadline_misses} / ${bf.iterations}</b></div>
-    <div class="kv"><label>baseline, same length</label><b>${bb.deadline_misses} / ${bb.iterations}</b></div>
+    <div class="kv"><label>just before, same length</label><b>${bb.deadline_misses} / ${bb.iterations}</b></div>
+    <div class="kv"><label>noise envelope, fault-free windows</label><b>max ${r.brake_noise.max} (${r.brake_noise.windows} windows)</b></div>
     <div class="kv"><label>brake p99 latency, fault / baseline</label><b>${bf.latency_us.p99} / ${bb.latency_us.p99} us</b></div>
-    <div class="kv"><label>verdict</label><b style="color:${r.brake_miss_excess ? '#ef4444' : '#22c55e'}">${r.brake_miss_excess ? 'brake affected' : 'brake unaffected'}</b></div>`;
+    <div class="kv"><label>verdict</label><b style="color:${r.brake_miss_excess ? '#ef4444' : '#22c55e'}">${r.brake_miss_excess ? 'beyond platform noise' : 'brake within noise'}</b></div>`;
 }
 
 // ---------------- incident report ----------------
@@ -472,13 +480,19 @@ window.cz = {
   },
   state,
 };
+(window as unknown as { czTerm: Terminal }).czTerm = term;
 
 // ---------------- boot ----------------
 function boot(): void {
   term.loadAddon(fit);
   term.open($('term'));
-  fit.fit();
-  window.addEventListener('resize', () => fit.fit());
+  // Refit whenever the pane changes size: the process table fills in after the
+  // first telemetry arrives and shrinks the console card; a terminal sized
+  // before that would write its newest rows below the visible edge.
+  const refit = () => { try { fit.fit(); term.scrollToBottom(); } catch { /* not laid out yet */ } };
+  refit();
+  new ResizeObserver(refit).observe($('term'));
+  void document.fonts.ready.then(refit);
   term.onData((d) => send({ cmd: 'console', data: d }));
   document.querySelectorAll<HTMLButtonElement>('.chaos button[data-fault]').forEach((b) => {
     b.addEventListener('click', () => send({ cmd: 'fault', fault: b.dataset.fault }));
@@ -498,9 +512,11 @@ function boot(): void {
   };
   requestAnimationFrame(frame);
   setInterval(() => {
+    renderVehicle();
+  }, 200);
+  setInterval(() => {
     loopStats('brake');
     loopStats('steer');
-    renderVehicle();
     renderProcs();
     const h = state.hello;
     $('chip-os').textContent = h ? `${h.system} ${h.release} ${h.machine}` : 'QNX';
@@ -510,6 +526,6 @@ function boot(): void {
     const link = $('chip-link');
     link.classList.toggle('on', state.link);
     link.querySelector('b')!.textContent = state.link ? 'telemetry live' : 'no telemetry';
-  }, 200);
+  }, 500);
 }
 boot();
