@@ -2,6 +2,61 @@
 
 Decisions and problems, newest first.
 
+## 2026-11-23: final measurements
+
+- The last smoke test before the final results failed one check in the crash run: the brake had 2963 iterations
+  and 32 skipped releases against 3000 expected. The five missing releases were skipped in a gap that straddled
+  the edge of the measurement window: the samples on both sides of the gap lay outside the window, so those
+  releases were counted neither as run nor as skipped. Skipped releases are now assigned to a window by their own
+  release time (`skippedBetween()` in `dashboard/src/shared/runs.ts`, with a unit test), so every window accounts
+  for every release exactly; the re-run passed with, for example, 2971 run + 29 skipped = 3000. Miss counts now
+  include such edge gaps too.
+- The trace table now also lists the longest READY to RUNNING wait per fault, and the text claims only what that
+  table shows: in 4 of the 5 traces the longest wait is a stall in which the brake's CPU logged nothing at all.
+  `results.ts --render` rewrites `results/results.md` from `results/results.json` without measuring again.
+
+## 2026-11-23: video
+
+- Recorded from the live run with the Chrome DevTools screencast (every painted frame, JPEG) while a scripted
+  chaos run plays on the target; rendered to H.264 1920x1080 30 fps with ffmpeg. Narration is written after the
+  run from the numbers that run produced, voiced by ElevenLabs Jessica (`cgSgspJ2msm6clMCkdW9`,
+  `eleven_multilingual_v2`); every request is counted in `build/tts-ledger.json` and identical lines are cached,
+  so a re-record only pays for the sentences whose numbers changed.
+- First take: by the sensor-kill scene the page was 5 to 8 s behind the target (uptime advanced 78 s in 83 s of
+  video) because the CPU storm left Chromium a single host core and the charts issued about 2,200 `fillRect`
+  calls per frame. Fixed by drawing each chart layer as one batched path, slowing DOM refreshes, and anchoring
+  every narration clip to the moment the page actually displayed the event.
+- The 200 us bound on sensor reads tripped now and then on TCG noise (a correct but spurious SAFE_HOLD for a few
+  ms). Raised to 400 us, still well inside the 1 ms period.
+
+## 2026-11-23: evaluation method
+
+- Platform noise on this host is bursty: equal-length baseline windows ranged from 36 to 304 brake misses within
+  minutes, so comparing a fault window with the one window before it gave false alarms in both directions. The
+  verdict now compares the fault window with the noisiest fault-free window of the same length in the previous
+  minute (and a Poisson bound on the immediate baseline). The incident report is told the same.
+- `make test` asserts zero deadline misses only on KVM. Under TCG it asserts what is meaningful there: every fault
+  injected, restarts within 250 ms, the brake never off its CPU, never lost its sensor link during infotainment
+  faults, never paused its output for more than 50 ms, and detected a killed driver in the next period.
+- Kernel traces: QNX 8.0 can log a scheduling event on a CPU other than the one the thread runs on (the trace
+  showed the brake "running" on CPU 1 while its own `SchedGetCpuNum()` counter never saw it leave CPU 2), so the
+  analysis does not attribute per-CPU running time from THRUNNING events. It measures READY to RUNNING latency
+  and flags waits in which the brake CPU logged nothing at all (the emulated CPU was frozen).
+- Memory-leak stalls of up to 27 ms were host page faults: QEMU backs guest RAM lazily, so the first touch of
+  190 MB stalled other vCPUs. `-mem-prealloc` removed them (worst gap 4.7 ms).
+
+## 2026-11-23: recovery time
+
+- Crash detection took 210 ms and a 190 MB leak 12 s because `dumper` wrote a core file before teardown. The
+  guardian now sets `RLIMIT_CORE` to 0 on every child with `prlimit()`: detection 5 ms.
+- Spawn to ready took about 40 ms under TCG, mostly dynamic linking. Static linking (everything except telemetry,
+  which needs the shared-only libsocket) brought restarts to about 8 to 11 ms.
+- Controllers reconnect to a restarted driver on `PROCMGR_EVENT_PATHSPACE` instead of polling `open()` every
+  millisecond.
+- `procnto -h` (no idle halt) cut wake-up latency further but the target hung twice: two CPUs looping in
+  `x86_64_as_inv` (TLB invalidation) while the third spun in the idle loop (QEMU monitor `info registers`
+  against the procnto symbol file). Removed; 16 back-to-back faults ran clean afterwards.
+
 ## 2026-11-23: timing on QEMU TCG
 
 - The cloud session has no `/dev/kvm`, so QEMU runs in TCG (pure emulation). Measured the platform
@@ -26,7 +81,7 @@ Decisions and problems, newest first.
   - The brake loop reads wheel speed every period (1 kHz) and the pedal every fourth (250 Hz): one
     cross-process round trip in most periods instead of two.
   - `procnto -h` (no halt in idle) via an mkqnximage `options` snippet: a halted emulated CPU needs a
-    host thread wake-up before it sees an interrupt.
+    host thread wake-up before it sees an interrupt. (Later removed: it led to a hang, see "recovery time".)
   - Host side (`scripts/host-rt.sh`): QEMU runs with 3 vCPUs, each vCPU thread pinned to its own host
     core at SCHED_FIFO 10, the QEMU main loop at SCHED_FIFO 20; the fourth host core is left for the
     dashboard and recorder. QNX still does all scheduling inside the guest.
