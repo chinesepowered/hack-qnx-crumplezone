@@ -7,7 +7,7 @@ that restarts a failed process in milliseconds. A chaos panel injects five fault
 shows, from numbers measured inside QNX, that the safety loops keep running while the guardian recovers; an AI
 incident report summarises each run, and code checks every number in it against the event log.
 
-**Video:** YouTube link to be added at submission (local copy: [demo/video.mp4](demo/video.mp4), 1920x1080, 2:38)
+**Video:** https://youtu.be/2PXPmrBxjRM (2:38; local copy: [demo/video.mp4](demo/video.mp4))
 
 ![Dashboard on QNX OS 8.0](docs/screenshots/1-overview.png)
 

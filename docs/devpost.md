@@ -11,7 +11,7 @@ that restarts a failed process in milliseconds. A chaos panel injects five fault
 shows, from numbers measured inside QNX, that the safety loops keep running while the guardian recovers; an AI
 incident report summarises each run, and code checks every number in it against the event log.
 
-Video: YouTube link to be added at submission
+Video: https://youtu.be/2PXPmrBxjRM
 
 Repository: https://github.com/chinesepowered/hack-qnx-crumplezone
 
