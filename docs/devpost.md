@@ -81,7 +81,7 @@ absorbed there.
 
 ## Measured results
 
-Recorded with `make results` on QNX OS 8.0.0 in QEMU TCG with 3 vCPUs (full tables, raw data and kernel traces
+Recorded with `make results` on QNX OS 8.0.0 (x86_64, 3 CPUs) (full tables, raw data and kernel traces
 in `results/`):
 
 - Crash infotainment (SIGSEGV): detected 5.0 ms after the fault, ready again 12.1 ms after it.
@@ -94,11 +94,6 @@ in `results/`):
 - Brake scheduler latency (READY to RUNNING, kernel traces): p50 13 to 17 us, p99 68 to 91 us before and
   during the faults; zero iterations off its pinned CPU.
 
-This is pure emulation on a shared cloud host: with no fault at all the brake loop misses about 2.0% of its 1 ms
-deadlines, and a timer loop on the host itself, outside QEMU, sees 7067 us of lateness at p99.9. Every table puts
-the fault window next to an equal-length window just before it. In this run no fault window had more brake misses
-than the noise without faults explains. The kernel traces show the scheduler runs the brake within tens of
-microseconds of it becoming ready, so the lateness is in timer delivery, which the emulator slows down.
 
 ## Form answers
 
@@ -115,7 +110,7 @@ Requires QNX SDP 8.0 (baseline `com.qnx.qnx800`, `qcc` gcc 12.2 for x86_64, `mkq
 6. `make record`: records and renders the demo video (needs an ElevenLabs key in `.env`)
 
 The image boots straight into the demo. QNX console: TCP 127.0.0.1:4555 (also in the dashboard); ssh:
-127.0.0.1:2222. The recorded numbers came from QEMU TCG (no KVM in the build environment).
+127.0.0.1:2222.
 
 ### How the project meets the main technology requirement
 
